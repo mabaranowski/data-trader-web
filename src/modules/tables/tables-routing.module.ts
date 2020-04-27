@@ -11,27 +11,42 @@ import * as tablesContainers from './containers';
 /* Guards */
 import * as tablesGuards from './guards';
 import { SBRouteData } from '@modules/navigation/models';
+// import { DetailsComponent } from './containers/details/details.component';
 
 /* Routes */
 export const ROUTES: Routes = [
     {
-        path: '',
+        path: 'bundles',
         canActivate: [],
         component: tablesContainers.TablesComponent,
         data: {
-            title: 'Tables - SB Admin Angular',
-            breadcrumbs: [
-                {
-                    text: 'Dashboard',
-                    link: '/dashboard',
-                },
-                {
-                    text: 'Tables',
-                    active: true,
-                },
-            ],
+            title: 'Bundle Marketplace'
         } as SBRouteData,
     },
+    {
+        path: 'bundles/details/:id',
+        canActivate: [],
+        component: tablesContainers.DetailsComponent,
+        data: {
+            title: 'Details'
+        } as SBRouteData,
+    },
+    {
+        path: 'streams',
+        canActivate: [],
+        component: tablesContainers.TablesComponent,
+        data: {
+            title: 'Stream Marketplace'
+        } as SBRouteData,
+    },
+    {
+        path: 'streams/details/:id',
+        canActivate: [],
+        component: tablesContainers.DetailsComponent,
+        data: {
+            title: 'Details'
+        } as SBRouteData,
+    }
 ];
 
 @NgModule({

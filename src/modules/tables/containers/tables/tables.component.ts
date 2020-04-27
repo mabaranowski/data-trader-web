@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'sb-tables',
@@ -7,6 +8,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     styleUrls: ['tables.component.scss'],
 })
 export class TablesComponent implements OnInit {
-    constructor() {}
-    ngOnInit() {}
+
+    dataPath!: string;
+
+    constructor(public route: ActivatedRoute) {}
+    
+    ngOnInit() {
+        this.route.url.subscribe(params => {
+            this.dataPath = params[0].path;
+        })
+    }
 }

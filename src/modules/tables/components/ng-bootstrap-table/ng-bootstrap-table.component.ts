@@ -1,16 +1,8 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Input,
-    OnInit,
-    QueryList,
-    ViewChildren,
-} from '@angular/core';
-import { SBSortableHeaderDirective, SortEvent } from '@modules/tables/directives';
-import { Country } from '@modules/tables/models';
-import { CountryService } from '@modules/tables/services';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Dataset } from '@modules/tables/models/dataset.model';
+import { DatasetService } from '@modules/tables/services/dataset.service';
+import { Observable, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'sb-ng-bootstrap-table',
@@ -19,31 +11,31 @@ import { Observable } from 'rxjs';
     styleUrls: ['ng-bootstrap-table.component.scss'],
 })
 export class NgBootstrapTableComponent implements OnInit {
-    @Input() pageSize = 4;
+    @Input() pageSize = 10;
 
-    countries$!: Observable<Country[]>;
+    datasets$!: Observable<Dataset[]>;
     total$!: Observable<number>;
-    sortedColumn!: string;
-    sortedDirection!: string;
-
-    @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
+    dataPath!: string;
 
     constructor(
-        public countryService: CountryService,
-        private changeDetectorRef: ChangeDetectorRef
+        public datasetService: DatasetService,
+        private changeDetectorRef: ChangeDetectorRef,
+        public route: ActivatedRoute
     ) {}
 
     ngOnInit() {
-        this.countryService.pageSize = this.pageSize;
-        this.countries$ = this.countryService.countries$;
-        this.total$ = this.countryService.total$;
+        this.datasets$ = this.datasetService.datasets$;
+        
+        this.route.url.subscribe(params => {
+            this.dataPath = params[0].path;
+            this.datasets$ = of(this.datasetService.getDatasets(this.dataPath));
+        });
+
+        
+
+        // this.countryService.pageSize = this.pageSize;
+        // this.datasets$ = this.countryService.countries$;
+        // this.total$ = this.countryService.total$;
     }
 
-    onSort({ column, direction }: SortEvent) {
-        this.sortedColumn = column;
-        this.sortedDirection = direction;
-        this.countryService.sortColumn = column;
-        this.countryService.sortDirection = direction;
-        this.changeDetectorRef.detectChanges();
-    }
 }

@@ -21,6 +21,10 @@ import {
     faCog,
     faSignOutAlt,
     faAddressCard,
+    faSearchPlus,
+    faSyncAlt,
+    faBolt,
+    faCube,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeSolidIcons = {
@@ -44,4 +48,8 @@ export const fontAwesomeSolidIcons = {
     faCog,
     faSignOutAlt,
     faAddressCard,
+    faSearchPlus,
+    faSyncAlt,
+    faBolt,
+    faCube,
 };

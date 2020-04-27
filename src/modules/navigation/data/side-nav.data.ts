@@ -6,8 +6,8 @@ export const sideNavSections: SideNavSection[] = [
         items: ['dashboard'],
     },
     {
-        text: 'STORE',
-        items: ['browse', 'share', 'metric'],
+        text: 'MARKET',
+        items: ['browseBundles', 'browseStreams', 'share', 'metric'],
     },
     {
         text: 'ACCOUNT',
@@ -21,10 +21,15 @@ export const sideNavItems: SideNavItems = {
         text: 'Dashboard',
         link: '/dashboard',
     },
-    browse: {
-        icon: 'search',
-        text: 'Browse',
-        link: '/browse',
+    browseBundles: {
+        icon: 'cube',
+        text: 'Browse bundles',
+        link: '/browse/bundles',
+    },
+    browseStreams: {
+        icon: 'bolt',
+        text: 'Browse streams',
+        link: '/browse/streams',
     },
     share: {
         icon: 'share',
@@ -34,7 +39,7 @@ export const sideNavItems: SideNavItems = {
     metric: {
         icon: 'address-card',
         text: 'Metrics',
-        link: '/metric',
+        link: '/metrics',
     },
     settings: {
         icon: 'cog',
