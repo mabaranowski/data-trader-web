@@ -46,6 +46,22 @@ export const ROUTES: Routes = [
         data: {
             title: 'Details'
         } as SBRouteData,
+    },
+    {
+        path: 'share',
+        canActivate: [],
+        component: tablesContainers.ShareComponent,
+        data: {
+            title: 'Share'
+        } as SBRouteData,
+    },
+    {
+        path: 'metrics',
+        canActivate: [],
+        component: tablesContainers.MetricsComponent,
+        data: {
+            title: 'Metrics'
+        } as SBRouteData,
     }
 ];
 

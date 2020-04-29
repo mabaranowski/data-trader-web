@@ -16,7 +16,7 @@ export const ROUTES: Routes = [
     {
         path: '',
         canActivate: [],
-        component: utilityContainers.VersionComponent,
+        component: utilityContainers.SettingsComponent,
     },
 ];
 

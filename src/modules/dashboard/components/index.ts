@@ -3,11 +3,11 @@ import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.co
 import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.component';
 
 export const components = [
-    DashboardCardsComponent,
+    // DashboardCardsComponent,
     DashboardChartsComponent,
     DashboardTablesComponent,
 ];
 
-export * from './dashboard-cards/dashboard-cards.component';
+// export * from './dashboard-cards/dashboard-cards.component';
 export * from './dashboard-charts/dashboard-charts.component';
 export * from './dashboard-tables/dashboard-tables.component';

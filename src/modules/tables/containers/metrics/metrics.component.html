@@ -1,0 +1,171 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Metrics" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <sb-card>
+        <div class="card-body">
+            <form>
+                <h4 class="text-muted">Personal data</h4>
+                <hr class="mb-4 mt-0">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                First Name
+                            </label>
+                            <input
+                            class="form-control py-4" type="text"
+                            placeholder="Enter first name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Last Name
+                            </label>
+                            <input
+                            class="form-control py-4" type="text"
+                            placeholder="Enter last name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Age
+                            </label>
+                            <input
+                            class="form-control py-4" type="number"
+                            placeholder="Enter age" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Gender
+                            </label>
+                            <div style="margin: 0.7rem !important" class="d-flex justify-content-around">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="genderGroup">
+                                    <label class="form-check-label">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="genderGroup">
+                                    <label class="form-check-label">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="mb-1">
+                        Email
+                    </label>
+                    <input
+                    class="form-control py-4" type="email" aria-describedby="emailHelp"
+                    placeholder="Enter email address" />
+                </div> -->
+                <h4 class="text-muted mt-4">Location</h4>
+                <hr class="mb-4 mt-0">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Longitude
+                            </label>
+                            <input
+                            class="form-control py-4" placeholder="Enter longitude" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Latitude
+                            </label>
+                            <input class="form-control py-4" placeholder="Enter latitude" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                City
+                            </label>
+                            <input
+                            class="form-control py-4" placeholder="Enter longitude" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Setting
+                            </label>
+                            <div style="margin: 0.7rem !important" class="d-flex justify-content-around">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="settingGroup">
+                                    <label class="form-check-label">Indoors</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="settingGroup">
+                                    <label class="form-check-label">Outdoors</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="text-muted mt-4">Additional info</h4>
+                <hr class="mb-4 mt-0">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Education
+                            </label>
+                            <input
+                            class="form-control py-4" type="text"
+                            placeholder="Enter education stage" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Household income
+                            </label>
+                            <input
+                            class="form-control py-4" type="number"
+                            placeholder="Enter household income" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Residents
+                            </label>
+                            <input
+                            class="form-control py-4" type="number"
+                            placeholder="Enter number of residents" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mb-1">
+                                Energy
+                            </label>
+                            <input
+                            class="form-control py-4" type="number"
+                            placeholder="Enter average monthly energy usage" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4 mb-0">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Save</button>
+                </div>
+            </form>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

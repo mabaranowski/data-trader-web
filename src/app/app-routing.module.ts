@@ -35,7 +35,7 @@ const routes: Routes = [
             import('modules/tables/tables-routing.module').then(m => m.TablesRoutingModule),
     },
     {
-        path: 'version',
+        path: 'settings',
         loadChildren: () =>
             import('modules/utility/utility-routing.module').then(m => m.UtilityRoutingModule),
     },

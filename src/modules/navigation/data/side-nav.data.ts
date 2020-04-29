@@ -34,12 +34,12 @@ export const sideNavItems: SideNavItems = {
     share: {
         icon: 'share',
         text: 'Share',
-        link: '/share',
+        link: '/browse/share',
     },
     metric: {
         icon: 'address-card',
         text: 'Metrics',
-        link: '/metrics',
+        link: '/browse/metrics',
     },
     settings: {
         icon: 'cog',
@@ -49,6 +49,6 @@ export const sideNavItems: SideNavItems = {
     logout: {
         icon: 'sign-out-alt',
         text: 'Logout',
-        link: '/logout',
+        link: '/auth/login',
     },
 };
