@@ -1,4 +1,4 @@
-import { User } from '@modules/auth/models';
+import { User } from '@app/auth/models/auth.model';
 export { User };
 
 export class MockUser implements User {

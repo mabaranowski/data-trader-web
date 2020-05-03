@@ -1,0 +1,46 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Details" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <sb-card>
+        <div class="card-body">
+            <div class="card small-card">
+                <div class="card-body">
+                    <h5 class="card-title">Dataset id: </h5>
+                    <p class="card-text">{{ dataset.id }}</p>
+                </div>
+            </div>
+            <div class="card small-card">
+                <div class="card-body">
+                    <h5 class="card-title">Type: </h5>
+                    <p class="card-text">{{ dataset.type }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Location: </h5>
+                    <p class="card-text">{{ dataset.location }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quantity: </h5>
+                    <p class="card-text">{{ dataset.quantity }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Date: </h5>
+                    <p class="card-text">{{ dataset.date }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Description: </h5>
+                    <p class="card-text">{{ dataset.description }}</p>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="button" class="btn btn-success btn-lg btn-block">Get!</button>
+            </div>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

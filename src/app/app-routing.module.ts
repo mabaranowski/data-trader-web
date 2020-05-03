@@ -8,47 +8,38 @@ const routes: Routes = [
         redirectTo: '/dashboard',
     },
     {
-        path: 'charts',
-        loadChildren: () =>
-            import('modules/charts/charts-routing.module').then(m => m.ChartsRoutingModule),
-    },
-    {
         path: 'dashboard',
         loadChildren: () =>
-            import('modules/dashboard/dashboard-routing.module').then(
-                m => m.DashboardRoutingModule
-            ),
+            import('app/dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule),
+    },
+    {
+        path: 'account',
+        loadChildren: () =>
+            import('app/account/account-routing.module').then(m => m.AccountRoutingModule),
     },
     {
         path: 'auth',
         loadChildren: () =>
-            import('modules/auth/auth-routing.module').then(m => m.AuthRoutingModule),
+            import('app/auth/auth-routing.module').then(m => m.AuthRoutingModule),
     },
     {
-        path: 'error',
+        path: 'market',
         loadChildren: () =>
-            import('modules/error/error-routing.module').then(m => m.ErrorRoutingModule),
-    },
-    {
-        path: 'browse',
-        loadChildren: () =>
-            import('modules/tables/tables-routing.module').then(m => m.TablesRoutingModule),
-    },
-    {
-        path: 'settings',
-        loadChildren: () =>
-            import('modules/utility/utility-routing.module').then(m => m.UtilityRoutingModule),
+            import('app/market/market-routing.module').then(m => m.MarketRoutingModule),
     },
     {
         path: '**',
         pathMatch: 'full',
-        loadChildren: () =>
-            import('modules/error/error-routing.module').then(m => m.ErrorRoutingModule),
+        redirectTo: '/dashboard'
     },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
+    imports: [
+        RouterModule.forRoot(routes)
+    ],
+    exports: [
+        RouterModule
+    ],
 })
 export class AppRoutingModule {}

@@ -1,6 +1,6 @@
-import { UserService } from '@modules/auth/services';
 import { MockUser, User } from '@testing/mocks';
 import { Observable, of } from 'rxjs';
+import { UserService } from '@app/auth/services/user.service';
 
 const mockUser = new MockUser();
 
