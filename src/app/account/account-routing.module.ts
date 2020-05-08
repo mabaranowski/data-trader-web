@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AccountModule } from './account.module';
+import { AuthGuard } from '@app/auth/auth.guard';
 
 export const ROUTES: Routes = [
     {
@@ -11,7 +12,9 @@ export const ROUTES: Routes = [
     },
     {
         path: 'settings',
-        canActivate: [],
+        canActivate: [
+            AuthGuard
+        ],
         component: SettingsComponent,
     },
 ];

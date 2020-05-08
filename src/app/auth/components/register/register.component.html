@@ -1,29 +1,55 @@
-<sb-layout-auth
-    ><div class="container">
+<sb-layout-auth>
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5">
                 <div class="card shadow-lg border-0 rounded-lg mt-5" style="margin-top: 6rem !important;">
-                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-4">Create Account</h3>
+                    </div>
                     <div class="card-body">
-                        <form>
+                        <form (ngSubmit)="onSubmit()" #f="ngForm">
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputFirstName">First Name</label><input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" /></div>
+                                    <div class="form-group"><label class="small mb-1" for="inputFirstName">First
+                                            Name</label>
+                                            <input 
+                                            class="form-control py-4" 
+                                            id="inputFirstName" 
+                                            type="text"
+                                            placeholder="Enter first name" 
+                                            name="first_name"
+                                            ngModel
+                                            required
+                                            /></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputLastName">Last Name</label><input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" /></div>
+                                    <div class="form-group"><label class="small mb-1" for="inputLastName">Last
+                                            Name</label><input class="form-control py-4" id="inputLastName" type="text"
+                                            placeholder="Enter last name" name="last_name"
+                                            ngModel required/></div>
                                 </div>
                             </div>
-                            <div class="form-group"><label class="small mb-1" for="inputEmailAddress">Email</label><input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" /></div>
+                            <div class="form-group"><label class="small mb-1"
+                                    for="inputEmailAddress">Email</label><input class="form-control py-4"
+                                    id="inputEmailAddress" type="email" aria-describedby="emailHelp"
+                                    placeholder="Enter email address" name="email"
+                                    ngModel required/></div>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputPassword">Password</label><input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" /></div>
+                                    <div class="form-group"><label class="small mb-1"
+                                            for="inputPassword">Password</label><input class="form-control py-4"
+                                            id="inputPassword" type="password" placeholder="Enter password" name="password"
+                                            ngModel required/></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm Password</label><input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" /></div>
+                                    <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm
+                                            Password</label><input class="form-control py-4" id="inputConfirmPassword"
+                                            type="password" placeholder="Confirm password" ngModel name="confirmPassword"
+                                            required/></div>
                                 </div>
                             </div>
-                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" routerLink="/dashboard">Create Account</a></div>
+                            <div class="text-danger" style="font-size: small; text-align: center;">{{error}}</div>
+                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit">Create Account</button></div>
                         </form>
                     </div>
                     <div class="card-footer text-center">
@@ -32,5 +58,5 @@
                 </div>
             </div>
         </div>
-    </div></sb-layout-auth
->
+    </div>
+</sb-layout-auth>

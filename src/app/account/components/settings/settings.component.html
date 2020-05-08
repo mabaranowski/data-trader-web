@@ -2,7 +2,7 @@
     <sb-dashboard-head title="Settings" [hideBreadcrumbs]="true"></sb-dashboard-head>
     <sb-card>
         <div class="card-body">
-            <form>
+            <form (ngSubmit)="onSubmit()" #f="ngForm">
                 <h4 class="text-muted">Change password</h4>
                 <hr class="mb-4 mt-0">
                 <div class="form-row">
@@ -11,19 +11,34 @@
                             <label class="mb-1" for="inputPassword">
                                 Password
                             </label>
-                            <input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" /></div>
+                            <input class="form-control py-4" 
+                            id="inputPassword" 
+                            type="password" 
+                            placeholder="Enter password"
+                            ngModel
+                            name="password"
+                            required
+                            /></div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="mb-1" for="inputConfirmPassword">
                                 Confirm Password
                             </label>
-                            <input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" /></div>
+                            <input class="form-control py-4" 
+                            id="inputConfirmPassword" 
+                            type="password" 
+                            placeholder="Confirm password"
+                            ngModel
+                            name="confirmPassword"
+                            required
+                            /></div>
                     </div>
                 </div>
 
+                <div class="text-danger" style="font-size: small; text-align: center;">{{error}}</div>
                 <div class="form-group mt-4 mb-0">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Change password</button>
+                    <button class="btn btn-primary btn-lg btn-block">Change password</button>
                 </div>
             </form>
         </div>

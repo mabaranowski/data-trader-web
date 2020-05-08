@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { SettingsComponent } from './components/settings/settings.component';
 import { NavigationModule } from '@app/navigation/navigation.module';
 import { CommonsModule } from '@app/commons/commons.module';
+import { SettingsService } from './services/settings.service';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import { CommonsModule } from '@app/commons/commons.module';
         NavigationModule,
         CommonsModule
     ],
-    providers: [],
+    providers: [SettingsService],
     declarations: [ 
         SettingsComponent
     ],

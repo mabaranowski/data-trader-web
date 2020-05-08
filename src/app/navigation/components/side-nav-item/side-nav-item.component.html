@@ -4,7 +4,8 @@
         <fa-icon [icon]='["fas", sideNavItem.icon]'></fa-icon>
     </div>
     <span *ngIf="sideNavItem.icon == 'bolt'">&nbsp;</span>
-    {{sideNavItem.text}}
+    <a *ngIf="sideNavItem.text == 'Logout'" (click)="onLogout()">{{sideNavItem.text}}</a>
+    <div *ngIf="sideNavItem.text != 'Logout'">{{sideNavItem.text}}</div> 
     <div class="sb-sidenav-collapse-arrow">
         <fa-icon class="ml-auto" *ngIf="sideNavItem.submenu" [icon]="['fas', 'angle-down']"></fa-icon>
     </div>

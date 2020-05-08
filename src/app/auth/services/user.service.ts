@@ -1,25 +1,50 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { User } from '../models/auth.model';
+import { UserModel } from '../models/user.model';
 
-const userSubject: ReplaySubject<User> = new ReplaySubject(1);
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserService {
-    constructor() {
-        this.user = {
-            id: '123',
-            firstName: 'Tim',
-            lastName: 'Winter',
-            email: 'timwinter@test.com',
-        };
+    user = new BehaviorSubject<UserModel>(null!);
+    
+    constructor(private httpClient: HttpClient) {}
+
+    private authenticate(email: string, token: string) {
+        const user = new UserModel(email, token);
+        this.user.next(user);
+        localStorage.setItem("userData", JSON.stringify(user))
     }
 
-    set user(user: User) {
-        userSubject.next(user);
+    autoLogin() {
+        const userData = JSON.parse(localStorage.getItem('userData')!);
+        if(!userData) {
+            return;
+        }
+        
+        const user = new UserModel(userData._email, userData._token)
+        if(user.token) {
+            this.user.next(user);
+        }
     }
 
-    get user$(): Observable<User> {
-        return userSubject.asObservable();
+    registerUser(user: User): Observable<User> {
+        return this.httpClient.post<User>('http://localhost:3000/api/auth/register', user)
+        .pipe(tap(res => {
+            this.authenticate(res.email!, res.token!);
+        }));
+    }
+    
+    loginUser(user: User) {
+        return this.httpClient.post<User>('http://localhost:3000/api/auth/login', user)
+        .pipe(tap(res => {
+            this.authenticate(res.email!, res.token!);
+        }));
+    }
+
+    logoutUser() {
+        this.user.next(null!);
+        localStorage.removeItem('userData');
     }
 }
