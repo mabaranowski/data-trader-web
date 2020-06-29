@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardModule } from './dashboard.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SBRouteData } from '@app/navigation/models/navigation.model';
+import { AuthGuard } from '@app/auth/auth.guard';
 
 export const ROUTES: Routes = [
     {
