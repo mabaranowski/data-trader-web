@@ -29,14 +29,21 @@ export class SettingsComponent implements OnInit {
         this.changeDetectorRef.markForCheck();
         return;
       }
-      this.settingsService.changePassword(this.settingsForm.value.password).subscribe(res => {
-        console.log(res)
-        this.router.navigate(['/auth/login']);
-      }, 
-      err => {
-        this.error = err.error;
-        this.changeDetectorRef.markForCheck();
-      });
+
+      this.settingsService.checkPasswordValidity(this.settingsForm.value.currentPassword).subscribe(res => {
+        if(res) {
+          this.settingsService.changePassword(this.settingsForm.value.password).subscribe(res => {
+            this.router.navigate(['/auth/login']);
+          }, err => {
+            this.error = err.error;
+            this.changeDetectorRef.markForCheck();
+          });
+        } else {
+          this.error = 'Incorrect password';
+          this.changeDetectorRef.markForCheck();
+          return;
+        }
+      })
     } else {
         this.error = 'All fields are required';
         this.changeDetectorRef.markForCheck();

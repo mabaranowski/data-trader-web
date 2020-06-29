@@ -13,12 +13,20 @@ export class SettingsService {
 
     changePassword(password: string) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.post('http://localhost:3000/api/settings', {
-                password: password,
-                email: user.email 
+            return this.httpClient.post('http://localhost:3000/api/settings/change-password', {
+                email: user.email, 
+                password: password
             });
         }));
-        
+    }
+
+    checkPasswordValidity(password: string) {
+        return this.userService.user.pipe(take(1), exhaustMap(user => {
+            return this.httpClient.post('http://localhost:3000/api/settings/check-password', {
+                email: user.email,
+                password: password
+            });
+        }));
     }
     
 }
