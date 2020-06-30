@@ -12,6 +12,7 @@ import { NavigationModule } from '@app/navigation/navigation.module';
 import { CommonsModule } from '@app/commons/commons.module';
 import { DashboardCardsComponent } from '@app/dashboard/components/dashboard-cards/dashboard-cards.component';
 import { DashboardModule } from '@app/dashboard/dashboard.module';
+import { MarketService } from './services/market.service';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { DashboardModule } from '@app/dashboard/dashboard.module';
     ],
     providers: [
         DecimalPipe,
-        DatasetService
+        DatasetService,
+        MarketService
     ],
     declarations: [ 
         DetailsComponent,

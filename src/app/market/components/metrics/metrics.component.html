@@ -2,7 +2,7 @@
     <sb-dashboard-head title="Metrics" [hideBreadcrumbs]="true"></sb-dashboard-head>
     <sb-card>
         <div class="card-body">
-            <form>
+            <form (ngSubmit)="onSubmit()" #f="ngForm">
                 <h4 class="text-muted">Personal data</h4>
                 <hr class="mb-4 mt-0">
                 <div class="form-row">
@@ -12,8 +12,11 @@
                                 First Name
                             </label>
                             <input
-                            class="form-control py-4" type="text"
-                            placeholder="Enter first name" />
+                            class="form-control py-4" 
+                            type="text"
+                            placeholder="Enter first name" 
+                            name="firstName"
+                            ngModel/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -22,8 +25,11 @@
                                 Last Name
                             </label>
                             <input
-                            class="form-control py-4" type="text"
-                            placeholder="Enter last name" />
+                            class="form-control py-4" 
+                            type="text"
+                            placeholder="Enter last name" 
+                            name="lastName"
+                            ngModel/>
                         </div>
                     </div>
                 </div>
@@ -34,8 +40,11 @@
                                 Age
                             </label>
                             <input
-                            class="form-control py-4" type="number"
-                            placeholder="Enter age" />
+                            class="form-control py-4" 
+                            type="number"
+                            placeholder="Enter age" 
+                            name="age"
+                            ngModel/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -45,11 +54,21 @@
                             </label>
                             <div style="margin: 0.7rem !important" class="d-flex justify-content-around">
                                 <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="genderGroup">
+                                    <input 
+                                    type="radio" 
+                                    class="form-check-input" 
+                                    name="genderGroup"
+                                    ngModel
+                                    value="male">
                                     <label class="form-check-label">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="genderGroup">
+                                    <input 
+                                    type="radio" 
+                                    class="form-check-input" 
+                                    name="genderGroup"
+                                    ngModel
+                                    value="female">
                                     <label class="form-check-label">Female</label>
                                 </div>
                             </div>
@@ -73,7 +92,10 @@
                                 Longitude
                             </label>
                             <input
-                            class="form-control py-4" placeholder="Enter longitude" />
+                            class="form-control py-4" 
+                            placeholder="Enter longitude" 
+                            name="longitude"
+                            ngModel/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -81,7 +103,11 @@
                             <label class="mb-1">
                                 Latitude
                             </label>
-                            <input class="form-control py-4" placeholder="Enter latitude" />
+                            <input 
+                            class="form-control py-4" 
+                            placeholder="Enter latitude" 
+                            name="latitude"
+                            ngModel/>
                         </div>
                     </div>
                 </div>
@@ -93,7 +119,10 @@
                                 City
                             </label>
                             <input
-                            class="form-control py-4" placeholder="Enter longitude" />
+                            class="form-control py-4" 
+                            placeholder="Enter city" 
+                            name="city"
+                            ngModel/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -103,11 +132,21 @@
                             </label>
                             <div style="margin: 0.7rem !important" class="d-flex justify-content-around">
                                 <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="settingGroup">
+                                    <input 
+                                    type="radio" 
+                                    class="form-check-input" 
+                                    name="settingsGroup"
+                                    ngModel
+                                    value="indoors">
                                     <label class="form-check-label">Indoors</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="settingGroup">
+                                    <input 
+                                    type="radio" 
+                                    class="form-check-input" 
+                                    name="settingsGroup"
+                                    ngModel
+                                    value="outdoors">
                                     <label class="form-check-label">Outdoors</label>
                                 </div>
                             </div>
@@ -124,18 +163,24 @@
                                 Education
                             </label>
                             <input
-                            class="form-control py-4" type="text"
-                            placeholder="Enter education stage" />
+                            class="form-control py-4" 
+                            type="text"
+                            placeholder="Enter education stage" 
+                            name="education"
+                            ngModel/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="mb-1">
-                                Household income
+                                Household income (USD)
                             </label>
                             <input
-                            class="form-control py-4" type="number"
-                            placeholder="Enter household income" />
+                            class="form-control py-4" 
+                            type="number"
+                            placeholder="Enter household income" 
+                            name="householdIncome"
+                            ngModel/>
                         </div>
                     </div>
                 </div>
@@ -146,24 +191,31 @@
                                 Residents
                             </label>
                             <input
-                            class="form-control py-4" type="number"
-                            placeholder="Enter number of residents" />
+                            class="form-control py-4" 
+                            type="number"
+                            placeholder="Enter number of residents" 
+                            name="residents"
+                            ngModel/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="mb-1">
-                                Energy
+                                Energy (kWh)
                             </label>
                             <input
-                            class="form-control py-4" type="number"
-                            placeholder="Enter average monthly energy usage" />
+                            class="form-control py-4" 
+                            type="number"
+                            placeholder="Enter average monthly energy usage" 
+                            name="energy"
+                            ngModel/>
                         </div>
                     </div>
                 </div>
 
+                <div class="text-danger" style="font-size: small; text-align: center;">{{error}}</div>
                 <div class="form-group mt-4 mb-0">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Save</button>
+                    <button class="btn btn-primary btn-lg btn-block">Save</button>
                 </div>
             </form>
         </div>
