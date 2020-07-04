@@ -1,42 +1,10 @@
 <div class="row">
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-success">
-            <div class="card-body">Success Card</div>
-        </sb-card-view-details>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-success">
-            <div class="card-body">Success Card</div>
-        </sb-card-view-details>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-danger">
-            <div class="card-body">Danger Card</div>
-        </sb-card-view-details>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-success">
-            <div class="card-body">Success Card</div>
-        </sb-card-view-details>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-warning">
-            <div class="card-body">Warning Card</div>
-        </sb-card-view-details>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-danger">
-            <div class="card-body">Danger Card</div>
-        </sb-card-view-details>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-success">
-            <div class="card-body">Success Card</div>
-        </sb-card-view-details>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-success">
-            <div class="card-body">Success Card</div>
+    <div *ngFor="let device of deviceList" class="col-xl-3 col-md-6">
+        <sb-card-view-details 
+        background="bg-success" 
+        [removeState]="removeState"
+        (removeEvent)="onRemoveEvent(device._id)">
+            <div class="card-body">{{device.name}}</div>
         </sb-card-view-details>
     </div>
 </div>

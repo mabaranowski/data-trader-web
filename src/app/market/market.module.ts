@@ -13,6 +13,7 @@ import { CommonsModule } from '@app/commons/commons.module';
 import { DashboardCardsComponent } from '@app/dashboard/components/dashboard-cards/dashboard-cards.component';
 import { DashboardModule } from '@app/dashboard/dashboard.module';
 import { MarketService } from './services/market.service';
+import { NgPopupComponent } from './components/ng-popup/ng-popup.component';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { MarketService } from './services/market.service';
         MetricsComponent,
         NgBootstrapTableComponent,
         ShareComponent,
-        TablesComponent
+        TablesComponent,
+        NgPopupComponent
      ],
     exports: [ 
         TablesComponent 

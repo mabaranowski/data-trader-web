@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'sb-card-view-details',
@@ -9,9 +10,11 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 export class CardViewDetailsComponent implements OnInit {
     @Input() background!: string;
     @Input() color!: string;
-    @Input() link = '';
+    @Input() removeState!: boolean;
+    @Output() removeEvent = new EventEmitter<void>();
 
     customClasses: string[] = [];
+    faTimesCircle = faTimesCircle;
 
     constructor() {}
     ngOnInit() {
@@ -22,4 +25,9 @@ export class CardViewDetailsComponent implements OnInit {
             this.customClasses.push(this.color);
         }
     }
+
+    onRemove() {
+        this.removeEvent.emit();
+    }
+
 }

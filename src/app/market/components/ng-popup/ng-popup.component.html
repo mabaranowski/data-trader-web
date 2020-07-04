@@ -1,0 +1,66 @@
+<ng-template #content let-modal>
+    <div>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">New device</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <div class="form-group">
+                  <label for="device-name" class="col-form-label">Device name:</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  id="device-name" 
+                  ngbAutofocus
+                  name="deviceName"
+                  ngModel
+                  requred>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                      <label for="device-address">Device address:</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      id="device-address"
+                      name="deviceAddress"
+                      ngModel
+                      required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="device-port">Device port:</label>
+                      <input 
+                      type="number" 
+                      class="form-control" 
+                      id="device-port"
+                      name="devicePort"
+                      ngModel
+                      required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="device-type">Device type:</label>
+                    <select class="form-control" id="device-type" name="deviceType" ngModel>
+                        <option selected disabled>Please select</option>
+                        <option *ngFor="let type of deviceTypeList">{{type}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="device-location">Device location:</label>
+                    <select class="form-control" id="device-location" name="deviceLocation" ngModel>
+                        <option selected disabled>Please select</option>
+                        <option *ngFor="let location of deviceLocationList">{{location}}</option>
+                    </select>
+                </div>
+                <div *ngIf="invalid" class="text-center text-danger">Fill the form</div>
+                <br *ngIf="!invalid">
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Save</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</ng-template>

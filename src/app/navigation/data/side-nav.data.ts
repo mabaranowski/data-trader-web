@@ -33,7 +33,7 @@ export const sideNavItems: SideNavItems = {
     },
     share: {
         icon: 'share',
-        text: 'Share',
+        text: 'Devices',
         link: '/market/share',
     },
     metric: {

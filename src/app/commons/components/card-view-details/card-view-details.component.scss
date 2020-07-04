@@ -1,1 +1,8 @@
 @import 'styles/variables.scss';
+
+.remove-btn {
+    position: absolute;
+    z-index: 10;
+    right: 5px;
+    cursor: pointer;
+}
