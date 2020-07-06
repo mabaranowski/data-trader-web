@@ -1,0 +1,43 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Details" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <sb-card>
+        <div class="card-body">
+            <h4 class="text-muted">Device details</h4>
+            <hr class="mb-4 mt-0">
+            <div *ngIf="!!device">
+                <div class="form-group">
+                    <p class="h5">Name:</p>
+                    <p class="h6 font-weight-normal">{{device.name}}</p>
+                </div>
+                <div class="form-group">
+                    <p class="h5">Address:</p>
+                    <p class="h6 font-weight-normal">{{device.address}}</p>
+                </div>
+                <div class="form-group">
+                    <p class="h5">Port:</p>
+                    <p class="h6 font-weight-normal">{{device.port}}</p>
+                </div>
+                <div class="form-group" *ngIf="!!device.type">
+                    <p class="h5">Type:</p>
+                    <p class="h6 font-weight-normal">{{device.type}}</p>
+                </div>
+                <div class="form-group" *ngIf="!!device.location">
+                    <p class="h5">Location:</p>
+                    <p class="h6 font-weight-normal">{{device.location}}</p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <div *ngIf="isActive">
+                    <h4 class="text-muted">Device activity</h4>
+                    <hr class="mb-4 mt-0">
+                </div>
+                <div *ngIf="!isActive">
+                    <h4 class="text-danger">Device is currently offline</h4>
+                </div>
+            </div>
+        </div>
+    </sb-card>
+    <div class="mb-4">
+        <button class="btn btn-secondary btn-lg text-left" [routerLink]="['../../']">Back</button>
+    </div>
+</sb-layout-dashboard>

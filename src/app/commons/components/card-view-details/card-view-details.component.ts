@@ -12,6 +12,7 @@ export class CardViewDetailsComponent implements OnInit {
     @Input() color!: string;
     @Input() removeState!: boolean;
     @Output() removeEvent = new EventEmitter<void>();
+    @Output() getDetailsEvent = new EventEmitter<void>();
 
     customClasses: string[] = [];
     faTimesCircle = faTimesCircle;
@@ -24,6 +25,10 @@ export class CardViewDetailsComponent implements OnInit {
         if (this.color) {
             this.customClasses.push(this.color);
         }
+    }
+
+    onGetDetails() {
+        this.getDetailsEvent.emit();
     }
 
     onRemove() {

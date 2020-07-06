@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { MarketService } from '@app/market/services/market.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'sb-dashboard-cards',
@@ -11,7 +12,11 @@ export class DashboardCardsComponent implements OnInit {
     @Input() removeState!: boolean;
     @Input() deviceList!: any[];
     
-    constructor(private marketService: MarketService) {}
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private marketService: MarketService
+        ) {}
 
     ngOnInit() {
         //TODO Implement connection to devices and color based on success
@@ -23,6 +28,10 @@ export class DashboardCardsComponent implements OnInit {
 
         this.marketService.removeDevice(id).subscribe(res => {
         });
+    }
+
+    onGetDetailsEvent(id: string) {
+        this.router.navigate(['details', id], { relativeTo: this.route });
     }
 
 }

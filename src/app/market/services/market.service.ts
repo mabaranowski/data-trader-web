@@ -46,6 +46,13 @@ export class MarketService {
         }));
     }
 
+    getDeviceDetails(id: string) {
+        return this.userService.user.pipe(take(1), exhaustMap(user => {
+            const url = `http://localhost:3000/api/device/${id}`;
+            return this.httpClient.get(url);
+        }));
+    }
+
     removeDevice(id: string) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
             const params = new HttpParams().set('id', id);

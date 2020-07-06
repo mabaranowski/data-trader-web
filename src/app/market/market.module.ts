@@ -14,6 +14,7 @@ import { DashboardCardsComponent } from '@app/dashboard/components/dashboard-car
 import { DashboardModule } from '@app/dashboard/dashboard.module';
 import { MarketService } from './services/market.service';
 import { NgPopupComponent } from './components/ng-popup/ng-popup.component';
+import { DeviceDetailsComponent } from './components/device-details/device-details.component';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { NgPopupComponent } from './components/ng-popup/ng-popup.component';
         NgBootstrapTableComponent,
         ShareComponent,
         TablesComponent,
-        NgPopupComponent
+        NgPopupComponent,
+        DeviceDetailsComponent
      ],
     exports: [ 
         TablesComponent 

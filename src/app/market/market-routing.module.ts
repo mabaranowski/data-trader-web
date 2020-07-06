@@ -6,6 +6,7 @@ import { ShareComponent } from './components/share/share.component';
 import { MetricsComponent } from './components/metrics/metrics.component';
 import { SBRouteData } from '@app/navigation/models/navigation.model';
 import { MarketModule } from './market.module';
+import { DeviceDetailsComponent } from './components/device-details/device-details.component';
 
 export const ROUTES: Routes = [
     {
@@ -51,6 +52,14 @@ export const ROUTES: Routes = [
         component: ShareComponent,
         data: {
             title: 'Share'
+        } as SBRouteData,
+    },
+    {
+        path: 'share/details/:id',
+        canActivate: [],
+        component: DeviceDetailsComponent,
+        data: {
+            title: 'Details'
         } as SBRouteData,
     },
     {
