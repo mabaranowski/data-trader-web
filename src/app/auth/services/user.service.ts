@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/auth.model';
 import { UserModel } from '../models/user.model';
@@ -8,13 +8,14 @@ import { UserModel } from '../models/user.model';
 @Injectable({ providedIn: 'root' })
 export class UserService {
     user = new BehaviorSubject<UserModel>(null!);
+    shareStateSubject = new Subject<boolean>();
     
     constructor(private httpClient: HttpClient) {}
 
     private authenticate(email: string, token: string) {
         const user = new UserModel(email, token);
         this.user.next(user);
-        localStorage.setItem("userData", JSON.stringify(user))
+        localStorage.setItem('userData', JSON.stringify(user))
     }
 
     autoLogin() {
@@ -47,4 +48,14 @@ export class UserService {
         this.user.next(null!);
         localStorage.removeItem('userData');
     }
+    
+    setUserSharing(isSharing: boolean) {
+        this.shareStateSubject.next(isSharing);
+        localStorage.setItem('share-permission', JSON.stringify(isSharing))
+    }
+
+    getUserSharing() {
+        return JSON.parse(localStorage.getItem('share-permission')!);
+    }
+
 }

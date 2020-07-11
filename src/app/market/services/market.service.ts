@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { UserService } from '@app/auth/services/user.service';
-import { take, exhaustMap } from 'rxjs/operators';
+import { take, exhaustMap, map } from 'rxjs/operators';
 import { Metrics } from '../models/metrics.model';
 import { Devices } from '../models/device.model';
+import { DeviceService } from '@app/commons/services/device.service';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MarketService {
 
     constructor(
         private httpClient: HttpClient,
-        private userService: UserService
-    ) {}
+        private userService: UserService,
+        private deviceService: DeviceService
+    ) { }
 
     updateMetrics(form: Metrics) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
@@ -38,11 +41,31 @@ export class MarketService {
             });
         }));
     }
-    
+
     getDevices() {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
             const params = new HttpParams().set('email', user.email!);
-            return this.httpClient.get('http://localhost:3000/api/device', { params: params });
+            return this.httpClient.get('http://localhost:3000/api/device', { params: params })
+                .pipe(
+                    map((val: any) => {
+                        val.forEach((element: any) => {
+                            this.deviceService.getDeviceInfo(element.address, element.port).subscribe(res => {
+                                element.state = 'bg-success';
+                            }, err => {
+                                if(err.status == /^1/ || /^3/) {
+                                    element.state = 'bg-warning';
+                                } 
+                                if(err.status == /^4/ || /^5/) {
+                                    element.state = 'bg-danger';
+                                } 
+                                if(err.status == 0) {
+                                    element.state = 'bg-secondary';
+                                }
+                            });
+                        });
+                        return val;
+                    })
+                );
         }));
     }
 
@@ -60,7 +83,16 @@ export class MarketService {
         }));
     }
 
+    getDeviceDataForIntervalPerUser(time: number) {
+        this.getDevices().subscribe(list => {
+            list.forEach((device: any) => {
+                this.deviceService.deviceDataSubscription(time, device.address, device.port);
+            });
+        });
+    }
 
+    stopGetDeviceDataForIntervalPerUser() {
+        this.deviceService.deviceDataUnsubscription();
+    }
 
-    
 }

@@ -1,12 +1,14 @@
 <div class="row">
     <div *ngFor="let device of deviceList" class="col-xl-3 col-md-6">
-        <sb-card-view-details 
-        background="bg-success" 
-        [removeState]="removeState"
-        (removeEvent)="onRemoveEvent(device._id)"
-        (getDetailsEvent)="onGetDetailsEvent(device._id)"
-        >
-            <div class="card-body">{{device.name}}</div>
-        </sb-card-view-details>
+        <div *ngIf="!!device.state">
+            <sb-card-view-details 
+            [background]="device.state" 
+            [removeState]="removeState"
+            (removeEvent)="onRemoveEvent(device._id)"
+            (getDetailsEvent)="onGetDetailsEvent(device._id)"
+            >
+                <div class="card-body">{{device.name}}</div>
+            </sb-card-view-details>
+        </div>
     </div>
 </div>

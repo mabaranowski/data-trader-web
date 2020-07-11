@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { MarketService } from '@app/market/services/market.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'sb-dashboard-cards',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './dashboard-cards.component.html',
     styleUrls: ['dashboard-cards.component.scss'],
 })
@@ -18,9 +17,7 @@ export class DashboardCardsComponent implements OnInit {
         private marketService: MarketService
         ) {}
 
-    ngOnInit() {
-        //TODO Implement connection to devices and color based on success
-    }
+    ngOnInit() {}
 
     onRemoveEvent(id: string) {
         const found = this.deviceList.findIndex((element: any) => element._id == id);
