@@ -33,6 +33,23 @@ export class MarketService {
         }));
     }
 
+    updateShareFlag(flag: boolean) {
+        return this.userService.user.pipe(take(1), exhaustMap(user => {
+            return this.httpClient.patch('http://localhost:3000/api/metrics/share-flag', {
+                email: user.email,
+                isSharing: flag
+            });
+        }));
+    }
+
+    getShareFlag() {
+        return this.userService.user.pipe(take(1), exhaustMap(user => {
+            return this.httpClient.post('http://localhost:3000/api/metrics/share-flag', {
+                email: user.email
+            });
+        }));
+    }
+
     addDevice(form: Devices) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
             return this.httpClient.post('http://localhost:3000/api/device', {

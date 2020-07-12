@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, take, exhaustMap } from 'rxjs/operators';
 import { User } from '../models/auth.model';
 import { UserModel } from '../models/user.model';
 
@@ -12,8 +12,8 @@ export class UserService {
     
     constructor(private httpClient: HttpClient) {}
 
-    private authenticate(email: string, token: string) {
-        const user = new UserModel(email, token);
+    private authenticate(email: string, token: string, isSharing: boolean) {
+        const user = new UserModel(email, token, isSharing);
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user))
     }
@@ -24,7 +24,7 @@ export class UserService {
             return;
         }
         
-        const user = new UserModel(userData._email, userData._token)
+        const user = new UserModel(userData._email, userData._token, userData._isSharing);
         if(user.token) {
             this.user.next(user);
         }
@@ -33,15 +33,21 @@ export class UserService {
     registerUser(user: User): Observable<User> {
         return this.httpClient.post<User>('http://localhost:3000/api/auth/register', user)
         .pipe(tap(res => {
-            this.authenticate(res.email!, res.token!);
+            this.authenticate(res.email!, res.token!, false);
         }));
     }
     
     loginUser(user: User) {
         return this.httpClient.post<User>('http://localhost:3000/api/auth/login', user)
         .pipe(tap(res => {
-            this.authenticate(res.email!, res.token!);
+            this.authenticate(res.email!, res.token!, res.isSharing!);
         }));
+    }
+
+    storeIsSharing(isSharing: boolean) {
+        const userData = JSON.parse(localStorage.getItem('userData')!);
+        userData._isSharing = isSharing;
+        localStorage.setItem('userData', JSON.stringify(userData));
     }
 
     logoutUser() {
@@ -51,11 +57,7 @@ export class UserService {
     
     setUserSharing(isSharing: boolean) {
         this.shareStateSubject.next(isSharing);
-        localStorage.setItem('share-permission', JSON.stringify(isSharing))
-    }
-
-    getUserSharing() {
-        return JSON.parse(localStorage.getItem('share-permission')!);
+        this.storeIsSharing(isSharing);
     }
 
 }

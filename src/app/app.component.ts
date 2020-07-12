@@ -31,16 +31,24 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.userService.autoLogin();
-        
-        console.log('HELLO');
-        console.log(this.userService.getUserSharing());
-        this.userService.shareStateSubject.subscribe(state => {
-            console.log(state);
-            if(state) {
-                this.marketService.getDeviceDataForIntervalPerUser(5 * 1000);
+        this.autoShare(2 * 1000);
+    }
+
+    private autoShare(time: number) {
+        this.userService.user.subscribe(usr => {
+            if(!!usr && usr.isSharing) {
+                this.marketService.getDeviceDataForIntervalPerUser(time);
             } else {
                 this.marketService.stopGetDeviceDataForIntervalPerUser();
             }
-        })
+        });
+
+        this.userService.shareStateSubject.subscribe(state => {
+            if(state) {
+                this.marketService.getDeviceDataForIntervalPerUser(time);
+            } else {
+                this.marketService.stopGetDeviceDataForIntervalPerUser();
+            }
+        });
     }
 }

@@ -25,7 +25,9 @@ export class ShareComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchDevices();
-    this.shareState = this.userService.getUserSharing();
+    this.marketService.getShareFlag().subscribe((res: any) => {
+      this.shareState = res;
+    });
   }
 
   onAdd() {
@@ -44,13 +46,8 @@ export class ShareComponent implements OnInit {
 
   onShare(flag: boolean) {
     this.shareState = flag;
+    this.marketService.updateShareFlag(flag).subscribe();
     this.userService.setUserSharing(flag);
-  }
-
-  connectToDevice(address: string, port: number) {
-    this.deviceService.getDeviceInfo(address, port).subscribe(res => {
-      console.log(res);
-    });
   }
 
   private fetchDevices() {
