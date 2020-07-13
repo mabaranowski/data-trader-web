@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MarketService } from '@app/market/services/market.service';
 import { Devices } from '@app/market/models/device.model';
+import { DeviceService } from '@app/commons/services/device.service';
+import { DataService } from '@app/commons/services/data.service';
 
 @Component({
   selector: 'sb-device-details',
@@ -11,17 +13,37 @@ import { Devices } from '@app/market/models/device.model';
 export class DeviceDetailsComponent implements OnInit {
   private device!: Devices;
   private isActive: boolean = false;
+  private data!: any[];
+  private color!: string;
 
   constructor(
     private route: ActivatedRoute,
-    private marketService: MarketService
+    private marketService: MarketService,
+    private deviceService: DeviceService,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
     const id: any = this.route.snapshot.paramMap.get('id');
-    this.marketService.getDeviceDetails(id).subscribe(res => {
+    this.marketService.getDeviceDetails(id).subscribe((res: any) => {
       this.device = res;
+
+      this.deviceService.getDeviceInfo(res.address, res.port).subscribe((dev: any) => {
+        this.isActive = true;
+        
+        const tmpData: any[] = []
+        this.dataService.getDataForDevice(id).subscribe((data: any) => {
+
+          data.forEach((element: any) => {
+            tmpData.push(element.payload);
+          });
+          this.data = tmpData;
+        });
+      }, err => {
+        this.isActive = false;
+      });
     });
+
   }
 
 }

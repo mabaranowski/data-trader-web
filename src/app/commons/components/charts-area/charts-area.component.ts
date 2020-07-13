@@ -5,69 +5,57 @@ import {
     ElementRef,
     OnInit,
     ViewChild,
+    Input,
+    ChangeDetectorRef,
+    OnChanges,
+    SimpleChanges,
 } from '@angular/core';
 import { Chart } from 'chart.js';
+import moment from 'moment';
 
 @Component({
     selector: 'sb-charts-area',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './charts-area.component.html',
     styleUrls: ['charts-area.component.scss'],
 })
 export class ChartsAreaComponent implements OnInit, AfterViewInit {
     @ViewChild('myAreaChart') myAreaChart!: ElementRef<HTMLCanvasElement>;
+    @Input() payload!: any[];
+    @Input() color!: string;
+
+    labels: string[] = [];
+    data: any[] = [];
     chart!: Chart;
 
     constructor() {}
-    ngOnInit() {}
+
+    ngOnInit() {
+        this.calculateProperLength(24);
+        this.payload.forEach(data => {
+            this.labels.push(moment(data.time).format('h:mm:ss a'));
+            this.data.push(data.value);
+        });
+    }
 
     ngAfterViewInit() {
         this.chart = new Chart(this.myAreaChart.nativeElement, {
             type: 'line',
             data: {
-                labels: [
-                    'Mar 1',
-                    'Mar 2',
-                    'Mar 3',
-                    'Mar 4',
-                    'Mar 5',
-                    'Mar 6',
-                    'Mar 7',
-                    'Mar 8',
-                    'Mar 9',
-                    'Mar 10',
-                    'Mar 11',
-                    'Mar 12',
-                    'Mar 13',
-                ],
+                labels: this.labels,
                 datasets: [
                     {
-                        label: 'Sessions',
+                        label: 'Data',
                         lineTension: 0.3,
-                        backgroundColor: 'rgba(2,117,216,0.2)',
-                        borderColor: 'rgba(2,117,216,1)',
-                        pointRadius: 5,
-                        pointBackgroundColor: 'rgba(2,117,216,1)',
+                        backgroundColor: this.colorPicker(0.2),
+                        borderColor: this.colorPicker(1),
+                        pointRadius: 4,
+                        pointBackgroundColor: this.colorPicker(1),
                         pointBorderColor: 'rgba(255,255,255,0.8)',
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: 'rgba(2,117,216,1)',
+                        pointHoverRadius: 1,
+                        pointHoverBackgroundColor: this.colorPicker(1),
                         pointHitRadius: 50,
                         pointBorderWidth: 2,
-                        data: [
-                            10000,
-                            30162,
-                            26263,
-                            18394,
-                            18287,
-                            28682,
-                            31274,
-                            33259,
-                            25849,
-                            24159,
-                            32651,
-                            31984,
-                            38451,
-                        ],
+                        data: this.data,
                     },
                 ],
             },
@@ -76,22 +64,20 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
                     xAxes: [
                         {
                             time: {
-                                unit: 'day',
+                                unit: 'minute',
                             },
                             gridLines: {
                                 display: false,
                             },
                             ticks: {
-                                maxTicksLimit: 7,
+                                maxTicksLimit: 10
                             },
                         },
                     ],
                     yAxes: [
                         {
                             ticks: {
-                                min: 0,
-                                max: 40000,
-                                maxTicksLimit: 5,
+                                maxTicksLimit: 10,
                             },
                             gridLines: {
                                 color: 'rgba(0, 0, 0, .125)',
@@ -105,4 +91,25 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
             },
         });
     }
+
+    private colorPicker(alpha: number) {
+        if(this.color === 'blue') {
+            return `rgba(2, 117, 214, ${alpha})`;
+        }
+        if(this.color === 'red') {
+            return `rgba(214, 2, 20, ${alpha})`;
+        }
+        if(this.color === 'green') {
+            return `rgba(2, 214, 13, ${alpha})`;
+        }
+        if(this.color === 'yellow') {
+            return `rgba(214, 196, 2, ${alpha})`;
+        }
+    }
+
+    private calculateProperLength(targetLen: number) {
+        const initLen = this.payload.length;
+        this.payload.splice(0, initLen - targetLen);
+    }
+
 }
