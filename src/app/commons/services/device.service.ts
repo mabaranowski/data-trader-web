@@ -4,13 +4,15 @@ import { interval, Observable, of, Subscription } from 'rxjs';
 import { flatMap, take, exhaustMap } from 'rxjs/operators';
 import { UserService } from '@app/auth/services/user.service';
 import { MarketService } from '@app/market/services/market.service';
+import { DataService } from './data.service';
 
 @Injectable({ providedIn: 'root' })
 export class DeviceService {
     private dataSubscription: Subscription[] = [];
     
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private dataService: DataService
     ) { }
 
     getDeviceInfo(address: string, port: number) {
@@ -27,15 +29,12 @@ export class DeviceService {
         return interval(time).pipe(flatMap(() => this.getDeviceData(address, port)));
     }
 
-    deviceDataSubscription(time: number, address: string, port: number) {
-        this.dataSubscription.push(this.getDeviceDataForInterval(time, address, port)
+    deviceDataSubscription(time: number, device: any) {
+        this.dataSubscription.push(this.getDeviceDataForInterval(time, device.address, device.port)
         .subscribe(
             data => {
-                console.log(data)
-            },
-            err => {
-                
-            }));
+                this.dataService.saveData(device._id, data).subscribe();
+            }, err => {}));
     }
 
     deviceDataUnsubscription() {

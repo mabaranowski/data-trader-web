@@ -15,6 +15,7 @@ import { DashboardModule } from '@app/dashboard/dashboard.module';
 import { MarketService } from './services/market.service';
 import { NgPopupComponent } from './components/ng-popup/ng-popup.component';
 import { DeviceDetailsComponent } from './components/device-details/device-details.component';
+import { IconsModule } from '@app/icons/icons.module';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { DeviceDetailsComponent } from './components/device-details/device-detai
         NavigationModule,
         CommonsModule,
         FormsModule,
-        DashboardModule
+        DashboardModule,
+        IconsModule
     ],
     providers: [
         DecimalPipe,

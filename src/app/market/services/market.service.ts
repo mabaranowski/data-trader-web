@@ -103,7 +103,7 @@ export class MarketService {
     getDeviceDataForIntervalPerUser(time: number) {
         this.getDevices().subscribe(list => {
             list.forEach((device: any) => {
-                this.deviceService.deviceDataSubscription(time, device.address, device.port);
+                this.deviceService.deviceDataSubscription(time, device);
             });
         });
     }
