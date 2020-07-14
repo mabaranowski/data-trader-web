@@ -1,37 +1,50 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
     Component,
     ElementRef,
     OnInit,
     ViewChild,
+    Input
 } from '@angular/core';
 import { Chart } from 'chart.js';
+import moment from 'moment';
+import { calculateProperLength, colorPicker } from '@app/commons/utils/chart.util';
 
 @Component({
     selector: 'sb-charts-bar',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './charts-bar.component.html',
     styleUrls: ['charts-bar.component.scss'],
 })
 export class ChartsBarComponent implements OnInit, AfterViewInit {
     @ViewChild('myBarChart') myBarChart!: ElementRef<HTMLCanvasElement>;
+    @Input() payload!: any[];
+    @Input() color!: string;
+
+    labels: string[] = [];
+    data: any[] = [];
     chart!: Chart;
 
     constructor() {}
-    ngOnInit() {}
+    
+    ngOnInit() {
+        calculateProperLength(this.payload, 24);
+        this.payload.forEach(data => {
+            this.labels.push(moment(data.time).format('h:mm:ss a'));
+            this.data.push(data.value);
+        });
+    }
 
     ngAfterViewInit() {
         this.chart = new Chart(this.myBarChart.nativeElement, {
             type: 'bar',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                labels: this.labels,
                 datasets: [
                     {
-                        label: 'Revenue',
-                        backgroundColor: 'rgba(2,117,216,1)',
-                        borderColor: 'rgba(2,117,216,1)',
-                        data: [4215, 5312, 6251, 7841, 9821, 14984],
+                        label: 'Data',
+                        backgroundColor: colorPicker(this.color, 1),
+                        borderColor: colorPicker(this.color, 1),
+                        data: this.data,
                     },
                 ],
             },
@@ -40,22 +53,20 @@ export class ChartsBarComponent implements OnInit, AfterViewInit {
                     xAxes: [
                         {
                             time: {
-                                unit: 'month',
+                                unit: 'minute',
                             },
                             gridLines: {
                                 display: false,
                             },
                             ticks: {
-                                maxTicksLimit: 6,
+                                maxTicksLimit: 10,
                             },
                         },
                     ],
                     yAxes: [
                         {
                             ticks: {
-                                min: 0,
-                                max: 15000,
-                                maxTicksLimit: 5,
+                                maxTicksLimit: 10,
                             },
                             gridLines: {
                                 display: true,
@@ -69,4 +80,5 @@ export class ChartsBarComponent implements OnInit, AfterViewInit {
             },
         });
     }
+
 }

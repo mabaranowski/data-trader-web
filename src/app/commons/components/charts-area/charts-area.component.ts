@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { Chart } from 'chart.js';
 import moment from 'moment';
+import { calculateProperLength, colorPicker } from '@app/commons/utils/chart.util';
 
 @Component({
     selector: 'sb-charts-area',
@@ -30,7 +31,7 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
     constructor() {}
 
     ngOnInit() {
-        this.calculateProperLength(24);
+        calculateProperLength(this.payload, 24);
         this.payload.forEach(data => {
             this.labels.push(moment(data.time).format('h:mm:ss a'));
             this.data.push(data.value);
@@ -46,13 +47,13 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
                     {
                         label: 'Data',
                         lineTension: 0.3,
-                        backgroundColor: this.colorPicker(0.2),
-                        borderColor: this.colorPicker(1),
+                        backgroundColor: colorPicker(this.color, 0.2),
+                        borderColor: colorPicker(this.color, 1),
                         pointRadius: 4,
-                        pointBackgroundColor: this.colorPicker(1),
+                        pointBackgroundColor: colorPicker(this.color, 1),
                         pointBorderColor: 'rgba(255,255,255,0.8)',
                         pointHoverRadius: 1,
-                        pointHoverBackgroundColor: this.colorPicker(1),
+                        pointHoverBackgroundColor: colorPicker(this.color, 1),
                         pointHitRadius: 50,
                         pointBorderWidth: 2,
                         data: this.data,
@@ -90,26 +91,6 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
                 },
             },
         });
-    }
-
-    private colorPicker(alpha: number) {
-        if(this.color === 'blue') {
-            return `rgba(2, 117, 214, ${alpha})`;
-        }
-        if(this.color === 'red') {
-            return `rgba(214, 2, 20, ${alpha})`;
-        }
-        if(this.color === 'green') {
-            return `rgba(2, 214, 13, ${alpha})`;
-        }
-        if(this.color === 'yellow') {
-            return `rgba(214, 196, 2, ${alpha})`;
-        }
-    }
-
-    private calculateProperLength(targetLen: number) {
-        const initLen = this.payload.length;
-        this.payload.splice(0, initLen - targetLen);
     }
 
 }
