@@ -1,9 +1,19 @@
 <sb-layout-dashboard>
-    <sb-dashboard-head *ngIf='dataPath == "bundles"' title="Browse bundles" [hideBreadcrumbs]="true"></sb-dashboard-head>
-    <sb-dashboard-head *ngIf='dataPath == "streams"' title="Browse streams" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <sb-dashboard-head 
+    *ngIf='dataType == "bundle"' 
+    title="Browse bundles" 
+    [hideBreadcrumbs]="true">
+    </sb-dashboard-head>
+    <sb-dashboard-head 
+    *ngIf='dataType == "stream"' 
+    title="Browse streams" 
+    [hideBreadcrumbs]="true">
+    </sb-dashboard-head>
     <sb-card>
         <div class="card-body">
-            <sb-ng-bootstrap-table [pageSize]="10"></sb-ng-bootstrap-table>
+            <sb-ng-bootstrap-table 
+            [datasets]="datasets"
+            [type]="dataType"></sb-ng-bootstrap-table>
         </div>
     </sb-card>
 </sb-layout-dashboard>

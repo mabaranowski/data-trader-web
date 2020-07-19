@@ -19,10 +19,10 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      of(this.datasetService.getDataset(this.route.snapshot.params.id))
-      .subscribe(val => {
-        this.dataset = val;
-      });
+      // of(this.datasetService.getDataset(this.route.snapshot.params.id))
+      // .subscribe(val => {
+      //   this.dataset = val;
+      // });
   }
 
 }

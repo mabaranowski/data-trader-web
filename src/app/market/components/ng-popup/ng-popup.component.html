@@ -45,14 +45,14 @@
                     <label for="device-type">Device type:</label>
                     <select class="form-control" id="device-type" name="deviceType" ngModel>
                         <option selected disabled>Please select</option>
-                        <option *ngFor="let type of deviceTypeList">{{type}}</option>
+                        <option *ngFor="let type of deviceTypeList">{{type.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="device-location">Device location:</label>
                     <select class="form-control" id="device-location" name="deviceLocation" ngModel>
                         <option selected disabled>Please select</option>
-                        <option *ngFor="let location of deviceLocationList">{{location}}</option>
+                        <option *ngFor="let location of deviceLocationList">{{location.name}}</option>
                     </select>
                 </div>
                 <div *ngIf="invalid" class="text-center text-danger">Fill the form</div>

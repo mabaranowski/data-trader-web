@@ -6,16 +6,12 @@ import { DatasetService } from '@app/market/services/dataset.service';
 
 @Component({
     selector: 'sb-ng-bootstrap-table',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './ng-bootstrap-table.component.html',
     styleUrls: ['ng-bootstrap-table.component.scss'],
 })
 export class NgBootstrapTableComponent implements OnInit {
-    @Input() pageSize = 10;
-
-    datasets$!: Observable<Dataset[]>;
-    total$!: Observable<number>;
-    dataPath!: string;
+    @Input() datasets: any;
+    @Input() type!: string;
 
     constructor(
         public datasetService: DatasetService,
@@ -24,18 +20,8 @@ export class NgBootstrapTableComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.datasets$ = this.datasetService.datasets$;
         
-        this.route.url.subscribe(params => {
-            this.dataPath = params[0].path;
-            this.datasets$ = of(this.datasetService.getDatasets(this.dataPath));
-        });
-
-        
-
-        // this.countryService.pageSize = this.pageSize;
-        // this.datasets$ = this.countryService.countries$;
-        // this.total$ = this.countryService.total$;
     }
+    
 
 }

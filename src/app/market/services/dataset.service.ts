@@ -2,40 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Dataset } from '../models/dataset.model';
 import { DATASETS } from '../data/datasets';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class DatasetService {
 
-    datasets$: Observable<Dataset[]>;
+    constructor(private httpClient: HttpClient) {}
 
-    constructor() {
-        this.datasets$ = of(DATASETS);
+    getDatasetsByType(type: string) {
+        const params = new HttpParams().set('type', type);
+        return this.httpClient.get('http://localhost:3000/api/dataset', { params: params })
     }
-
-    getDataset(id: number): Dataset {
-        let result: Dataset = {};
-        this.datasets$.subscribe(dataset => {
-            dataset.forEach(set => {
-                if(set.id == id) {
-                    result = set;
-                }
-            })
-        });
-        return result;
-    }
-
-    getDatasets(type: string): Dataset[] {
-        let result: Dataset[] = [];
-        this.datasets$.subscribe(dataset => {
-            dataset.forEach(set => {
-                if(set.internalType == type) {
-                    result.push(set);
-                }
-            })
-        });
-        return result;
-    }
-
     
-
 }

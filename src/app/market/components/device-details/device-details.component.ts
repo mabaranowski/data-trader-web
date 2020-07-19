@@ -4,6 +4,7 @@ import { MarketService } from '@app/market/services/market.service';
 import { Devices } from '@app/market/models/device.model';
 import { DeviceService } from '@app/commons/services/device.service';
 import { DataService } from '@app/commons/services/data.service';
+import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
 
 @Component({
   selector: 'sb-device-details',
@@ -27,7 +28,8 @@ export class DeviceDetailsComponent implements OnInit {
     const id: any = this.route.snapshot.paramMap.get('id');
     this.marketService.getDeviceDetails(id).subscribe((res: any) => {
       this.device = res;
-
+      res = this.translateValues(res);
+      
       this.deviceService.getDeviceInfo(res.address, res.port).subscribe((dev: any) => {
         this.isActive = true;
         
@@ -44,6 +46,14 @@ export class DeviceDetailsComponent implements OnInit {
       });
     });
 
+  }
+
+  private translateValues(res: any) {
+    const typeName = DEVICE_TYPE.find((val: any) => val.value === res.type);
+    const locationName = DEVICE_LOCATION.find((val: any) => val.value === res.location);
+    res.type = typeName?.name;
+    res.location = locationName?.name;
+    return res;
   }
 
 }

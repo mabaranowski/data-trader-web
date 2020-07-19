@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, Output, TemplateRef, ViewChild, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DEVICE_TYPES, DEVICE_LOCATIONS } from '@app/market/data/device-const';
+import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
 import { NgForm } from '@angular/forms';
 import { MarketService } from '@app/market/services/market.service';
 
@@ -14,8 +14,8 @@ export class NgPopupComponent implements OnInit, AfterViewInit {
   @ViewChild('f') deviceForm!: NgForm;
   @Output() closeEvent = new EventEmitter<void>();
   
-  deviceTypeList: string[] = [];
-  deviceLocationList: string[] = [];
+  deviceTypeList: any = [];
+  deviceLocationList: any[] = [];
   invalid: boolean = false;
 
   constructor(
@@ -24,8 +24,8 @@ export class NgPopupComponent implements OnInit, AfterViewInit {
     ) {}
 
   ngOnInit() {
-    this.deviceTypeList = DEVICE_TYPES;
-    this.deviceLocationList = DEVICE_LOCATIONS;
+    this.deviceTypeList = DEVICE_TYPE;
+    this.deviceLocationList = DEVICE_LOCATION;
   }
   
   ngAfterViewInit(): void {
@@ -42,6 +42,11 @@ export class NgPopupComponent implements OnInit, AfterViewInit {
 
   onSubmit(form: any) {
     if(form.valid) {
+      const type = this.deviceTypeList.find((val: any) => val.name === form.value.deviceType);
+      const location = this.deviceLocationList.find((val: any) => val.name === form.value.deviceLocation);
+      form.value.deviceType = type.value;
+      form.value.deviceLocation = location.value;
+      
       this.marketService.addDevice(form.value).subscribe(res => {
       });
       this.modalService.dismissAll();

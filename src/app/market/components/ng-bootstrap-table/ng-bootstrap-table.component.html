@@ -1,52 +1,57 @@
-<form>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    <span>Type</span>
-                </th>
-                <th scope="col">
-                    <span>Location</span>
-                </th>
-                <th scope="col">
-                    <span>Quantity</span>
-                </th>
-                <th scope="col">
-                    <span>Date</span>
-                </th>
-                <th scope="col">
-                    <span>Details</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let set of datasets$ | async">
-                <td>
-                    {{ set.type }}
-                </td>
-                <td>
-                    {{ set.location }}
-                </td>
-                <td>
-                    {{ set.quantity }}
-                </td>
-                <td>
-                    {{ set.date | date }} 
-                </td>
-                <td class="pt-2">
-                    <button 
-                    class="btn btn-primary btn-sm" 
-                    [routerLink]="['./details', set.id]">Details
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <!-- <div class="d-flex justify-content-center p-2">
-        <ngb-pagination 
-            [collectionSize]="12" 
-            [(page)]="1"
-            [pageSize]="10">
-        </ngb-pagination>
-    </div> -->
-</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col" class="width-20">
+                <span>Type</span>
+            </th>
+            <th scope="col" class="width-20">
+                <span>Location</span>
+            </th>
+            <th scope="col" class="width-20">
+                <span>Quantity</span>
+            </th>
+            <th scope="col" class="width-20" *ngIf="type === 'bundle'">
+                <span>Date</span>
+            </th>
+            <th scope="col" class="width-20" *ngIf="type === 'stream'">
+                <span>Updated</span>
+            </th>
+            <th scope="col" class="width-20">
+                <span>Details</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let set of datasets">
+            <td class="width-20">
+                {{ set.type }}
+            </td>
+            <td class="width-20">
+                {{ set.location }}
+            </td>
+            <td class="width-20">
+                {{ set.quantity }}
+            </td>
+            <td class="width-20" *ngIf="type === 'bundle'">
+                {{ set.date | date }}
+            </td>
+            <td class="width-20" *ngIf="type === 'stream'">
+                {{ set.lastUpdated | date: 'medium' }}
+            </td>
+            <td class="pt-2 width-20">
+                <button class="btn btn-primary btn-sm" [routerLink]="['./details', set.id]">
+                    Details
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<nav>
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
