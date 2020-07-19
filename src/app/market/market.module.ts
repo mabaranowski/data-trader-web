@@ -33,7 +33,7 @@ import { IconsModule } from '@app/icons/icons.module';
         DatasetService,
         MarketService
     ],
-    declarations: [ 
+    declarations: [
         DetailsComponent,
         MetricsComponent,
         NgBootstrapTableComponent,
@@ -41,9 +41,9 @@ import { IconsModule } from '@app/icons/icons.module';
         TablesComponent,
         NgPopupComponent,
         DeviceDetailsComponent
-     ],
-    exports: [ 
-        TablesComponent 
+    ],
+    exports: [
+        TablesComponent
     ],
 })
-export class MarketModule {}
+export class MarketModule { }
