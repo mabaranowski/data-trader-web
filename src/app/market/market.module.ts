@@ -26,7 +26,7 @@ import { IconsModule } from '@app/icons/icons.module';
         CommonsModule,
         FormsModule,
         DashboardModule,
-        IconsModule
+        IconsModule,
     ],
     providers: [
         DecimalPipe,

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatasetService } from '@app/market/services/dataset.service';
 import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
+import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
 
 @Component({
     selector: 'sb-tables',
@@ -24,18 +25,10 @@ export class TablesComponent implements OnInit {
 
         this.datasetService.getDatasetsByType(this.dataType).subscribe((res: any) => {
             res.forEach((element: any) => {
-                element = this.translateValues(element);
+                element = translateDeviceTypeLocation(element);
             });
-            this.datasets = this.translateValues(res);
+            this.datasets = translateDeviceTypeLocation(res);
         });
-    }
-
-    private translateValues(res: any) {
-        const typeName = DEVICE_TYPE.find((val: any) => val.value === res.type);
-        const locationName = DEVICE_LOCATION.find((val: any) => val.value === res.location);
-        res.type = typeName?.name;
-        res.location = locationName?.name;
-        return res;
     }
 
 }

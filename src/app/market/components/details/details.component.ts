@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Dataset } from '@app/market/models/dataset.model';
 import { DatasetService } from '@app/market/services/dataset.service';
 import { of } from 'rxjs';
+import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
+import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
 
 @Component({
   selector: 'sb-details',
@@ -10,8 +12,8 @@ import { of } from 'rxjs';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-
   dataset!: Dataset;
+  pathId!: string;
 
   constructor(
       public datasetService: DatasetService,
@@ -19,10 +21,20 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      // of(this.datasetService.getDataset(this.route.snapshot.params.id))
-      // .subscribe(val => {
-      //   this.dataset = val;
-      // });
+    this.pathId = this.route.snapshot.params.id;
+    this.datasetService.getDatasetDetails(this.pathId).subscribe(res => {
+      this.dataset = translateDeviceTypeLocation(res);
+    });
+  }
+
+  onGet() {
+    this.datasetService.getDatasetDetailsUnwrapped(this.pathId).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  onSubscribe() {
+
   }
 
 }

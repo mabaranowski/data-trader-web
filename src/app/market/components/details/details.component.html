@@ -1,45 +1,65 @@
 <sb-layout-dashboard>
-    <sb-dashboard-head title="Details" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <div *ngIf="!!dataset">    
+        <sb-dashboard-head title="Bundle details" [hideBreadcrumbs]="true" *ngIf="!!dataset.date"></sb-dashboard-head>
+        <sb-dashboard-head title="Stream details" [hideBreadcrumbs]="true" *ngIf="!dataset.date"></sb-dashboard-head>
+    </div>
     <sb-card>
         <div class="card-body">
-            <div class="card small-card">
-                <div class="card-body">
-                    <h5 class="card-title">Dataset id: </h5>
-                    <p class="card-text">{{ dataset.id }}</p>
+            <div *ngIf="!!dataset">
+                <div class="card half-inline-flex text-center">
+                    <div class="card-body">
+                        <p class="card-title h5">Dataset id</p>
+                        <p class="card-text">{{dataset._id}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card small-card">
-                <div class="card-body">
-                    <h5 class="card-title">Type: </h5>
-                    <p class="card-text">{{ dataset.type }}</p>
+                <div class="card half-inline-flex text-center" *ngIf="!!dataset.date">
+                    <div class="card-body">
+                        <p class="card-title h5">Date</p>
+                        <p class="card-text">{{dataset.date}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Location: </h5>
-                    <p class="card-text">{{ dataset.location }}</p>
+                <div class="card half-inline-flex text-center" *ngIf="!dataset.date">
+                    <div class="card-body">
+                        <p class="card-title h5">Last updated</p>
+                        <p class="card-text">{{dataset.lastUpdated}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Quantity: </h5>
-                    <p class="card-text">{{ dataset.quantity }}</p>
+                <div class="card half-inline-flex text-center">
+                    <div class="card-body">
+                        <p class="card-title h5">Type</p>
+                        <p class="card-text">{{dataset.type}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Date: </h5>
-                    <p class="card-text">{{ dataset.date }}</p>
+                <div class="card half-inline-flex text-center">
+                    <div class="card-body">
+                        <p class="card-title h5">Location</p>
+                        <p class="card-text">{{dataset.location}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Description: </h5>
-                    <p class="card-text">{{ dataset.description }}</p>
+                <div class="card half-inline-flex text-center">
+                    <div class="card-body">
+                        <p class="card-title h5">Quantity</p>
+                        <p class="card-text">{{dataset.quantity}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-3">
-                <button type="button" class="btn btn-success btn-lg btn-block">Get!</button>
+                <div class="card half-inline-flex text-center">
+                    <div class="card-body">
+                        <p class="card-title h5">Description</p>
+                        <p class="card-text">{{dataset.description}}</p>
+                    </div>
+                </div>
+                <div class="mt-3" *ngIf="!!dataset.date">
+                    <button 
+                    type="button" 
+                    class="btn btn-success btn-lg btn-block"
+                    (click)="onGet()">Get!</button>
+                </div>
+                <div class="mt-3" *ngIf="!dataset.date">
+                    <button 
+                    type="button" 
+                    class="btn btn-success btn-lg btn-block"
+                    (click)="onSubscribe()">Subscribe!</button>
+                </div>
             </div>
         </div>
     </sb-card>

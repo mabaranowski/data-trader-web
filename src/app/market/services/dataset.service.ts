@@ -14,4 +14,14 @@ export class DatasetService {
         return this.httpClient.get('http://localhost:3000/api/dataset', { params: params })
     }
     
+    getDatasetDetails(id: string) {
+        const url = `http://localhost:3000/api/dataset/${id}`;
+        return this.httpClient.get(url)
+    }
+
+    getDatasetDetailsUnwrapped(id: string) {
+        const url = `http://localhost:3000/api/dataset/${id}/unwrapped`;
+        return this.httpClient.get(url)
+    }
+
 }
