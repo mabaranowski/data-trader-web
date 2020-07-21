@@ -24,4 +24,9 @@ export class DatasetService {
         return this.httpClient.get(url)
     }
 
+    getDatasetDetailsUnwrappedMetadata(id: string) {
+        const url = `http://localhost:3000/api/dataset/${id}/unwrapped/metadata`;
+        return this.httpClient.get(url)
+    }
+
 }

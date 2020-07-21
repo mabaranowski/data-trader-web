@@ -5,6 +5,8 @@ import { DatasetService } from '@app/market/services/dataset.service';
 import { of } from 'rxjs';
 import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
 import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
+import { DomSanitizer } from '@angular/platform-browser';
+import { PurchaseService } from '@app/market/services/purchase.service';
 
 @Component({
   selector: 'sb-details',
@@ -13,11 +15,18 @@ import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
 })
 export class DetailsComponent implements OnInit {
   dataset!: Dataset;
+  datasetMetadata!: Dataset;
+  downloadJsonHref!: any;
+  downloadJsonHrefMetadata!: any;
+  
   pathId!: string;
+  filename!: string;;
 
   constructor(
-      public datasetService: DatasetService,
-      private route: ActivatedRoute
+      private datasetService: DatasetService,
+      private purchaseService: PurchaseService,
+      private route: ActivatedRoute,
+      private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -25,16 +34,27 @@ export class DetailsComponent implements OnInit {
     this.datasetService.getDatasetDetails(this.pathId).subscribe(res => {
       this.dataset = translateDeviceTypeLocation(res);
     });
+    
+    this.filename = `Bundle_${new Date().getTime()}.json`;
+    this.generateDownloadJsonUri();
   }
 
-  onGet() {
+  onClick() {
+    this.purchaseService.updatePurchasedDatasets(this.pathId).subscribe();
+  }
+
+  private generateDownloadJsonUri() {
     this.datasetService.getDatasetDetailsUnwrapped(this.pathId).subscribe(res => {
-      console.log(res);
+      this.downloadJsonHref = this.createUri(res);
     });
+    this.datasetService.getDatasetDetailsUnwrappedMetadata(this.pathId).subscribe(res => {
+      this.downloadJsonHrefMetadata = this.createUri(res);
+    }); 
   }
 
-  onSubscribe() {
-
+  private createUri(res: any) {
+    const theJSON = JSON.stringify(res);
+    return this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
   }
 
 }

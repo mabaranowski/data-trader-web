@@ -23,7 +23,8 @@ import {
     faSyncAlt,
     faBolt,
     faCube,
-    faTimesCircle
+    faTimesCircle,
+    faMobileAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeSolidIcons = {
@@ -51,5 +52,6 @@ export const fontAwesomeSolidIcons = {
     faSyncAlt,
     faBolt,
     faCube,
-    faTimesCircle
+    faTimesCircle,
+    faMobileAlt
 };

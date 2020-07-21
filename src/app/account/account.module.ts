@@ -6,6 +6,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { NavigationModule } from '@app/navigation/navigation.module';
 import { CommonsModule } from '@app/commons/commons.module';
 import { SettingsService } from './services/settings.service';
+import { SubsComponent } from './components/subs/subs.component';
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import { SettingsService } from './services/settings.service';
     ],
     providers: [SettingsService],
     declarations: [ 
-        SettingsComponent
+        SettingsComponent, SubsComponent
     ],
     exports: [],
 })
