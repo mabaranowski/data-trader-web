@@ -20,7 +20,8 @@ export class DetailsComponent implements OnInit {
   downloadJsonHrefMetadata!: any;
   
   pathId!: string;
-  filename!: string;;
+  filename!: string;
+  subscribed: boolean = false;
 
   constructor(
       private datasetService: DatasetService,
@@ -34,6 +35,14 @@ export class DetailsComponent implements OnInit {
     this.datasetService.getDatasetDetails(this.pathId).subscribe(res => {
       this.dataset = translateDeviceTypeLocation(res);
     });
+
+    this.purchaseService.getPurchasedDatasets().subscribe((res: any) => {
+      res.forEach((element: any) => {
+          if(this.pathId === element.dataset._id) {
+            this.subscribed = true;
+          }
+      });
+    });
     
     this.filename = `Bundle_${new Date().getTime()}.json`;
     this.generateDownloadJsonUri();
@@ -41,6 +50,7 @@ export class DetailsComponent implements OnInit {
 
   onClick() {
     this.purchaseService.updatePurchasedDatasets(this.pathId).subscribe();
+    this.subscribed = true;
   }
 
   private generateDownloadJsonUri() {

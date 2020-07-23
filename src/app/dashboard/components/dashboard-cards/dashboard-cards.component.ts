@@ -23,8 +23,7 @@ export class DashboardCardsComponent implements OnInit {
         const found = this.deviceList.findIndex((element: any) => element._id == id);
         this.deviceList.splice(found, 1);
 
-        this.marketService.removeDevice(id).subscribe(res => {
-        });
+        this.marketService.removeDevice(id).subscribe();
     }
 
     onGetDetailsEvent(id: string) {

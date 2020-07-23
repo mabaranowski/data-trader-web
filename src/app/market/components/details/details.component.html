@@ -64,9 +64,15 @@
                 </div>
                 <div class="mt-3" *ngIf="!dataset.date">
                     <button 
+                    *ngIf="!subscribed"
                     type="button" 
                     class="btn btn-success btn-lg btn-block"
                     (click)="onClick()">Subscribe!</button>
+                    <button 
+                    *ngIf="subscribed"
+                    type="button" 
+                    class="btn btn-secondary btn-lg btn-block">
+                    Subscribed</button>
                 </div>
             </div>
         </div>
