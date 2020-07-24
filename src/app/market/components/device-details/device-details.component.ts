@@ -16,7 +16,7 @@ export class DeviceDetailsComponent implements OnInit {
   private device!: Devices;
   private isActive: boolean = false;
   private data!: any[];
-  private color!: string;
+  private color!: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +46,24 @@ export class DeviceDetailsComponent implements OnInit {
         this.isActive = false;
       });
     });
-
+    this.color = this.randomColor();
   }
+
+
+  private randomColor() {
+    const random = Math.random() * 3 + 1;
+    if(random < 1) {
+        return 'yellow';
+    }
+    if(random >= 1 && random < 2) {
+        return 'red';
+    }
+    if(random >= 2 && random < 3) {
+        return 'blue';
+    }
+    if(random >= 3) {
+        return 'green';
+    }
+}
 
 }

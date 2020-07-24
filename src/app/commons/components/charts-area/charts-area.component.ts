@@ -23,6 +23,9 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
     @ViewChild('myAreaChart') myAreaChart!: ElementRef<HTMLCanvasElement>;
     @Input() payload!: any[];
     @Input() color!: string;
+    @Input() displayLabelX: boolean = true;
+    @Input() chartTitle: string = 'placeholder';
+    displayChartTitle: boolean = false;
 
     labels: string[] = [];
     data: any[] = [];
@@ -31,6 +34,12 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
     constructor() {}
 
     ngOnInit() {
+        if(typeof this.payload[0] == 'string') {
+            this.chartTitle = this.payload[0];
+            this.payload = this.payload[1];
+            this.displayChartTitle = true;
+        }
+        
         calculateProperLength(this.payload, 24);
         this.payload.forEach(data => {
             this.labels.push(moment(data.time).format('h:mm:ss a'));
@@ -71,7 +80,8 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
                                 display: false,
                             },
                             ticks: {
-                                maxTicksLimit: 10
+                                maxTicksLimit: 10,
+                                display: this.displayLabelX
                             },
                         },
                     ],
@@ -89,6 +99,10 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
                 legend: {
                     display: false,
                 },
+                title: {
+                    display: this.displayChartTitle,
+                    text: this.chartTitle
+                }
             },
         });
     }

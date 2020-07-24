@@ -27,7 +27,9 @@ export class DashboardCardsComponent implements OnInit {
     }
 
     onGetDetailsEvent(id: string) {
-        this.router.navigate(['details', id], { relativeTo: this.route });
+        this.router.navigate(['market/share/details', id]);
+        
+        // For future reference
+        // this.router.navigate(['details', id], { relativeTo: this.route });
     }
-
 }

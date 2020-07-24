@@ -1,10 +1,18 @@
 <sb-layout-dashboard>
     <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="true"></sb-dashboard-head>
     <h2 class="mt-4 text-muted">My devices</h2>
-    <!-- <sb-dashboard-cards></sb-dashboard-cards> -->
-    <h2 class="mt-4 text-muted">My data streams</h2>
-    <!-- <sb-dashboard-charts></sb-dashboard-charts> -->
-    <h2 class="mt-4 text-muted">Subscribed data streams</h2>
+    <sb-dashboard-cards [removeState]="false" [deviceList]="deviceList"></sb-dashboard-cards>
+    <h2 class="text-muted">My data streams</h2>
+    <sb-card *ngIf="!!data">
+        <div class="card-body">
+            <div class="row">
+                <div class="card-body col-xl-3 col-md-6" *ngFor="let dataset of data">
+                    <sb-charts-area [payload]="dataset" color="blue" [displayLabelX]="false"></sb-charts-area>
+                </div>
+            </div>
+        </div>
+    </sb-card>
+    <h2 class="text-muted">Subscribed data streams</h2>
     <!-- <sb-dashboard-charts></sb-dashboard-charts> -->
     <!-- <sb-dashboard-tables></sb-dashboard-tables> -->
 </sb-layout-dashboard>

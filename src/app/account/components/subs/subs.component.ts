@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { PurchaseService } from '@app/market/services/purchase.service';
 import { Dataset } from '@app/market/models/dataset.model';
+import { DatasetService } from '@app/market/services/dataset.service';
+import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'sb-subs',
@@ -8,10 +12,15 @@ import { Dataset } from '@app/market/models/dataset.model';
   styleUrls: ['./subs.component.scss']
 })
 export class SubsComponent implements OnInit {
+  @ViewChild('downloadRef') private downloadRef!: ElementRef;
   datasetList: any = [];
+  filename!: string;
+  downloadJsonHref!: any;
+  pathId!: string;
 
   constructor(
-    private purchaseService: PurchaseService
+    private purchaseService: PurchaseService,
+    private datasetService: DatasetService
   ) { }
 
   ngOnInit() {
@@ -24,6 +33,8 @@ export class SubsComponent implements OnInit {
         this.datasetList.push(element.dataset);
       });
     });
+
+    this.filename = `Stream_${new Date().getTime()}.json`;
   }
 
   onUnsubscribe(id: string) {
@@ -31,6 +42,24 @@ export class SubsComponent implements OnInit {
     
     const found = this.datasetList.findIndex((element: any) => element._id == id);
     this.datasetList.splice(found, 1);
+  }
+
+  onGet(id: string) {
+    this.datasetService.getDatasetDetailsUnwrapped(id).subscribe(res => {
+      this.downloadFile(res);
+    });
+  }
+
+  private downloadFile(res: any) {
+    const ref = this.downloadRef.nativeElement;
+    const theJSON = JSON.stringify(res);
+    const binaryData: any = [];
+    binaryData.push(theJSON);
+    const url = window.URL.createObjectURL(new Blob(binaryData, {type: "application/json"}));
+    
+    ref.href = url;
+    ref.download = this.filename;
+    ref.click();
   }
 
 }
