@@ -6,48 +6,51 @@
     <sb-card>
         <div class="card-body">
             <div *ngIf="!!dataset">
-                <div class="card half-inline-flex text-center">
-                    <div class="card-body">
+                <div class="row">
+                <div class="card half-inline-flex text-center col-md-6">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Dataset id</p>
                         <p class="card-text">{{dataset._id}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center" *ngIf="!!dataset.date">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6" *ngIf="!!dataset.date">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Date</p>
                         <p class="card-text">{{dataset.date}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center" *ngIf="!dataset.date">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6" *ngIf="!dataset.date">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Last updated</p>
                         <p class="card-text">{{dataset.lastUpdated}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Type</p>
                         <p class="card-text">{{dataset.type}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Location</p>
                         <p class="card-text">{{dataset.location}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Quantity</p>
                         <p class="card-text">{{dataset.quantity}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Description</p>
                         <p class="card-text">{{dataset.description}}</p>
                     </div>
                 </div>
+                </div>
+
                 <div class="mt-3" *ngIf="!!dataset.date">
                     <a
                     class="btn btn-success btn-lg btn-block"

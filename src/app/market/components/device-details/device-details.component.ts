@@ -49,7 +49,6 @@ export class DeviceDetailsComponent implements OnInit {
     this.color = this.randomColor();
   }
 
-
   private randomColor() {
     const random = Math.random() * 3 + 1;
     if(random < 1) {

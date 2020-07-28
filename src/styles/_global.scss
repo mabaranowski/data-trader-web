@@ -1,8 +1,18 @@
 // Global styling for this template
+@font-face {
+  font-family: 'Nunito';
+  src: url("assets/fonts/Nunito/Nunito-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Nunito-ExtraBold';
+  src: url("assets/fonts/Nunito/Nunito-ExtraBold.ttf") format("truetype");
+}
 
 html,
 body {
   height: 100%;
+  font-family: 'Nunito', sans-serif;
 }
 
 // Set spacing on containers for page symmetry

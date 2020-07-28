@@ -5,37 +5,39 @@
             <h4 class="text-muted">Device details</h4>
             <hr class="mb-4 mt-0">
             <div *ngIf="!!device">
-                <div class="card">
+                <div class="row">
+                <div class="card half-inline-flex col-12">
                     <div class="card-body text-center">
                         <p class="card-title h5">Name</p>
                         <p class="card-text">{{device.name}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Address</p>
                         <p class="card-text">{{device.address}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Port</p>
                         <p class="card-text">{{device.port}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center" *ngIf="!!device.type">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6" *ngIf="!!device.type">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Type</p>
                         <p class="card-text">{{device.type}}</p>
                     </div>
                 </div>
-                <div class="card half-inline-flex text-center" *ngIf="!!device.location">
-                    <div class="card-body">
+                <div class="card half-inline-flex text-center col-md-6" *ngIf="!!device.location">
+                    <div class="card-body card-no-flex">
                         <p class="card-title h5">Location</p>
                         <p class="card-text">{{device.location}}</p>
                     </div>
                 </div>
             </div>
+        </div>
             <div class="mt-4">
                 <div *ngIf="!isActive">
                     <h4 class="text-danger">Device is currently offline</h4>

@@ -39,7 +39,7 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
             this.payload = this.payload[1];
             this.displayChartTitle = true;
         }
-        
+
         calculateProperLength(this.payload, 24);
         this.payload.forEach(data => {
             this.labels.push(moment(data.time).format('h:mm:ss a'));
@@ -101,6 +101,7 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
                 },
                 title: {
                     display: this.displayChartTitle,
+                    fontFamily: 'Nunito-ExtraBold',
                     text: this.chartTitle
                 }
             },

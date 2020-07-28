@@ -1,4 +1,8 @@
 .half-inline-flex {
-    width: 50%;
     display: inline-flex;
+}
+
+.card-no-flex {
+    flex: none;
+    margin: auto;
 }

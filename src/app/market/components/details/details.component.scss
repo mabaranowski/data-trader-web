@@ -1,9 +1,13 @@
 .half-inline-flex {
-    width: 50%;
     display: inline-flex;
 }
 
 .small-btn-metadata {
     width: 75%;
+    margin: auto;
+}
+
+.card-no-flex {
+    flex: none;
     margin: auto;
 }
