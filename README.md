@@ -1,100 +1,33 @@
-# SB Admin Angular
+# data-trader-web
 
-SB Admin Angular is a free and open-sourced Bootstrap themed Angular 9 starter project.
+## Description
+This project is a client-side of **Data Trader**.
+The purpose is to provide the interface for users to interact with. 
+It also dispatches requests to connected sensors on a user's local network.
+It's built as an **Angular** single page application that communicates with server-side API.
 
-It shares the same project structure and subset of tooling from our professional offering,
-[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/),
-so much of the [SB Admin Pro Angular Documentation](https://docs.startbootstrap.com/sb-admin-pro-angular/quickstart) is applicable.
+It is a part of **Data Trader** project:
+- For a **server-side**, go to [data-trader-api](https://github.com/mabaranowski/data-trader-api.git)
+- For a **sensor-mock**, go to [data-trader-sensor](https://github.com/mabaranowski/data-trader-sensor.git)
 
-In particular the documentation for [Structure](https://docs.startbootstrap.com/sb-admin-pro-angular/structure-root-level),
-and the documentation for [SBPro Schematics](https://docs.startbootstrap.com/sb-admin-pro-angular/development-general#sb-pro-schematics)
+## Scheduler
+Its purpose is to send a request to the device and pass the response payload to backend API.
+The cron job runs every 1 minute. It asks connected devices for data, which are later sent to API for storage and aggregation.
 
-SB Admin Angular comes with a base implementation of navigation and layouts.
+## Requirements
+- Node.js 13.12.0+
+- npm 6.14.4+
+- Angular CLI 9.1.0+
 
-For professionally designed components (including an advanced SideNav), 100% code coverage,
-starter cypress tests and more, please consider our professional offering:
-[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/)
-
-## Quick Start
-
-```bash
-git clone git@github.com:startbootstrap/sb-admin-angular.git
-cd sb-admin-angular
-npm install
-npm start
+## Install
 ```
-
-`npm start` should open a browser window to <http://localhost:4200>
-
-By default angular runs on port 4200. To change this port you can run:
-
-```bash
-# This starts the development server on port 4205,
-# but you can use any port you'd like
-export PORT=4205 && npm start
+$ npm install
 ```
-
-## Tests
-
-### Unit Tests
-
-```bash
-npm run test
+## Build
 ```
-
-### e2e
-
-```bash
-npm run e2e
+$ ng build
 ```
-
-## Production
-
-SB Admin Angular come with a production ready Dockerfile and build scripts.
-
-You can get Docker [here](https://www.docker.com/get-started)
-
-```bash
-npm run docker:build
-npm run docker:run
+## Develop
 ```
-
-## Generate Code
-
-```bash
-npm run generate:module -- --path src/modules --name Test
-npm run generate:component -- --path src/modules/test/containers --name Test
-npm run generate:component -- --path src/modules/test/components --name Test
-npm run generate:directive -- --path src/modules/test/directives --name Test
-npm run generate:service -- --path src/modules/test/services --name Test
+$ ng serve
 ```
-
-_Note: Creating a Component and a Container use the same command,
-the difference is just the paths and how they are used._
-
-### MVCC
-
-Containers and Components are both Angular Components, but used in different ways.
-
-Containers should arrange Components.
-
-Obviously this can become subjective, but MVCC is the paradigm that we subscribe to.
-
-## Troubleshooting
-
-### npm start
-
-If you receive memory issues adjust
-`max_old_space_size` in the `ng` command of the `package.json`:
-
-```json
-"ng": "cross-env NODE_OPTIONS=--max_old_space_size=2048 ./node_modules/.bin/ng",
-```
-
-You can adjust 2048 to any number you need.
-
-For more information about why you may need `--max_old_space_size`
-see [this article](https://medium.com/@ashleydavis75/node-js-memory-limitations-30d3fe2664c0).
-
-Keep in mind that this project only uses node to build the angular application.
-There is no production dependency on node.
