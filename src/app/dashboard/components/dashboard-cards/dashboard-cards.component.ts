@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MarketService } from '@app/market/services/market.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'sb-dashboard-cards',
@@ -13,7 +13,6 @@ export class DashboardCardsComponent implements OnInit {
     
     constructor(
         private router: Router,
-        private route: ActivatedRoute,
         private marketService: MarketService
         ) {}
 

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MarketService } from '@app/market/services/market.service';
-import { Devices } from '@app/market/models/device.model';
-import { DeviceService } from '@app/commons/services/device.service';
 import { DataService } from '@app/commons/services/data.service';
-import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
+import { DeviceService } from '@app/commons/services/device.service';
 import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
+import { Devices } from '@app/market/models/device.model';
+import { MarketService } from '@app/market/services/market.service';
 
 @Component({
   selector: 'sb-device-details',

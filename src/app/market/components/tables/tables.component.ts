@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DatasetService } from '@app/market/services/dataset.service';
-import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
 import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
+import { DatasetService } from '@app/market/services/dataset.service';
 
 @Component({
     selector: 'sb-tables',

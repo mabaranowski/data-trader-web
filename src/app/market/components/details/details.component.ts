@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
 import { Dataset } from '@app/market/models/dataset.model';
 import { DatasetService } from '@app/market/services/dataset.service';
-import { of } from 'rxjs';
-import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
-import { translateDeviceTypeLocation } from '@app/commons/utils/dataset.util';
-import { DomSanitizer } from '@angular/platform-browser';
 import { PurchaseService } from '@app/market/services/purchase.service';
 
 @Component({

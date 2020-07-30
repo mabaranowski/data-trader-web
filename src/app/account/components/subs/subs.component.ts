@@ -1,10 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { PurchaseService } from '@app/market/services/purchase.service';
-import { Dataset } from '@app/market/models/dataset.model';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DatasetService } from '@app/market/services/dataset.service';
-import { ActivatedRoute } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
-import { take } from 'rxjs/operators';
+import { PurchaseService } from '@app/market/services/purchase.service';
 
 @Component({
   selector: 'sb-subs',

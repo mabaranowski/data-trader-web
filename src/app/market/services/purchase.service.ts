@@ -1,20 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { UserService } from '@app/auth/services/user.service';
-import { take, exhaustMap, map, filter } from 'rxjs/operators';
-import { Metrics } from '../models/metrics.model';
-import { Devices } from '../models/device.model';
-import { DeviceService } from '@app/commons/services/device.service';
-import { Subject } from 'rxjs';
-import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
+import { exhaustMap, take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class PurchaseService {
 
     constructor(
         private httpClient: HttpClient,
-        private userService: UserService,
-        private deviceService: DeviceService
+        private userService: UserService
     ) { }
 
     updatePurchasedDatasets(datasetId: string) {

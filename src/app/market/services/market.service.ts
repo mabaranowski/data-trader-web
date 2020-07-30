@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { UserService } from '@app/auth/services/user.service';
-import { take, exhaustMap, map } from 'rxjs/operators';
-import { Metrics } from '../models/metrics.model';
-import { Devices } from '../models/device.model';
 import { DeviceService } from '@app/commons/services/device.service';
-import { Subject } from 'rxjs';
+import { exhaustMap, map, take } from 'rxjs/operators';
+import { Devices } from '../models/device.model';
+import { Metrics } from '../models/metrics.model';
 
 @Injectable({ providedIn: 'root' })
 export class MarketService {

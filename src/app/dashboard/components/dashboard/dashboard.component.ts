@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MarketService } from '@app/market/services/market.service';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '@app/commons/services/data.service';
-import { PurchaseService } from '@app/market/services/purchase.service';
 import { DatasetService } from '@app/market/services/dataset.service';
+import { MarketService } from '@app/market/services/market.service';
+import { PurchaseService } from '@app/market/services/purchase.service';
 
 @Component({
     selector: 'sb-dashboard',
@@ -19,8 +19,7 @@ export class DashboardComponent implements OnInit {
         private marketService: MarketService,
         private dataService: DataService,
         private datasetService: DatasetService,
-        private purchaseService: PurchaseService,
-        private changeDetectorRef: ChangeDetectorRef
+        private purchaseService: PurchaseService
     ) { }
 
     ngOnInit() {

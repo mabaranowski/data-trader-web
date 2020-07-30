@@ -1,13 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserService } from '@app/auth/services/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
     
     constructor(
-        private httpClient: HttpClient,
-        private userService: UserService
+        private httpClient: HttpClient
     ) { }
 
     saveData(_id: string, data: any) {

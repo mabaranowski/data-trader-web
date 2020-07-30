@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MarketService } from '@app/market/services/market.service';
-import { Metrics } from '@app/market/models/metrics.model';
 
 @Component({
   selector: 'sb-metrics',

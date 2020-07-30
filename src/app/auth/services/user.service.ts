@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { tap, take, exhaustMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { User } from '../models/auth.model';
 import { UserModel } from '../models/user.model';
 

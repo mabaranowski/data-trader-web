@@ -1,9 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { MarketService } from '@app/market/services/market.service';
-import { Devices } from '@app/market/models/device.model';
-import { DeviceService } from '@app/commons/services/device.service';
-import { map } from 'rxjs/operators';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UserService } from '@app/auth/services/user.service';
+import { MarketService } from '@app/market/services/market.service';
 
 @Component({
   selector: 'sb-share',
@@ -19,7 +16,6 @@ export class ShareComponent implements OnInit {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private marketService: MarketService,
-    private deviceService: DeviceService,
     private userService: UserService
   ) { }
 

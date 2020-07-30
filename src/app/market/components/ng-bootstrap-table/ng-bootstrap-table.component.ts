@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Dataset } from '@app/market/models/dataset.model';
 import { DatasetService } from '@app/market/services/dataset.service';
 
 @Component({
@@ -22,7 +20,6 @@ export class NgBootstrapTableComponent implements OnInit, OnChanges {
 
     constructor(
         public datasetService: DatasetService,
-        private changeDetectorRef: ChangeDetectorRef,
         public route: ActivatedRoute
     ) { }
 

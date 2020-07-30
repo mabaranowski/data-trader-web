@@ -1,18 +1,13 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
     Component,
     ElementRef,
-    OnInit,
-    ViewChild,
-    Input,
-    ChangeDetectorRef,
-    OnChanges,
-    SimpleChanges,
+    Input, OnInit,
+    ViewChild
 } from '@angular/core';
+import { calculateProperLength, colorPicker } from '@app/commons/utils/chart.util';
 import { Chart } from 'chart.js';
 import moment from 'moment';
-import { calculateProperLength, colorPicker } from '@app/commons/utils/chart.util';
 
 @Component({
     selector: 'sb-charts-area',

@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, Observable, of, Subscription } from 'rxjs';
-import { flatMap, take, exhaustMap } from 'rxjs/operators';
-import { UserService } from '@app/auth/services/user.service';
-import { MarketService } from '@app/market/services/market.service';
+import { interval, Subscription } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { DataService } from './data.service';
 
 @Injectable({ providedIn: 'root' })
