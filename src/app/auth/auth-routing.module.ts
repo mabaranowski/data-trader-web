@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SBRouteData } from '@app/navigation/models/navigation.model';
 import { AuthModule } from './auth.module';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
@@ -26,14 +25,6 @@ export const ROUTES: Routes = [
         component: RegisterComponent,
         data: {
             title: 'Register',
-        } as SBRouteData,
-    },
-    {
-        path: 'forgot-password',
-        canActivate: [],
-        component: ForgotPasswordComponent,
-        data: {
-            title: 'Forgot Password',
         } as SBRouteData,
     },
 ];

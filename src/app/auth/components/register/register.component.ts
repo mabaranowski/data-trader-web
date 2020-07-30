@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '@app/auth/services/user.service';
-import { User } from '@testing/mocks';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -22,7 +21,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {}
 
     onSubmit() {
-        const user: User = {
+        const user: any = {
             firstName: this.registerForm.value.first_name,
             lastName: this.registerForm.value.last_name,
             email: this.registerForm.value.email,
