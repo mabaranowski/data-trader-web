@@ -5,6 +5,7 @@ import { DeviceService } from '@app/commons/services/device.service';
 import { exhaustMap, map, take } from 'rxjs/operators';
 import { Devices } from '../models/device.model';
 import { Metrics } from '../models/metrics.model';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class MarketService {
@@ -17,7 +18,7 @@ export class MarketService {
 
     updateMetrics(form: Metrics) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.patch('http://localhost:3000/api/metrics', {
+            return this.httpClient.patch(environment.API_URL + '/api/metrics', {
                 email: user.email,
                 form: form
             });
@@ -26,7 +27,7 @@ export class MarketService {
 
     getMetrics() {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.post('http://localhost:3000/api/metrics', {
+            return this.httpClient.post(environment.API_URL + '/api/metrics', {
                 email: user.email
             });
         }));
@@ -34,7 +35,7 @@ export class MarketService {
 
     updateShareFlag(flag: boolean) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.patch('http://localhost:3000/api/metrics/share-flag', {
+            return this.httpClient.patch(environment.API_URL + '/api/metrics/share-flag', {
                 email: user.email,
                 isSharing: flag
             });
@@ -43,7 +44,7 @@ export class MarketService {
 
     getShareFlag() {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.post('http://localhost:3000/api/metrics/share-flag', {
+            return this.httpClient.post(environment.API_URL + '/api/metrics/share-flag', {
                 email: user.email
             });
         }));
@@ -51,7 +52,7 @@ export class MarketService {
 
     addDevice(form: Devices) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.post('http://localhost:3000/api/device', {
+            return this.httpClient.post(environment.API_URL + '/api/device', {
                 email: user.email,
                 form: form
             });
@@ -61,7 +62,7 @@ export class MarketService {
     getDevices() {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
             const params = new HttpParams().set('email', user.email!);
-            return this.httpClient.get('http://localhost:3000/api/device', { params: params })
+            return this.httpClient.get(environment.API_URL + '/api/device', { params: params })
                 .pipe(
                     map((val: any) => {
                         val.forEach((element: any) => {
@@ -87,7 +88,7 @@ export class MarketService {
 
     getDeviceDetails(id: string) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            const url = `http://localhost:3000/api/device/${id}`;
+            const url = `${environment.API_URL}/api/device/${id}`;
             return this.httpClient.get(url);
         }));
     }
@@ -95,7 +96,7 @@ export class MarketService {
     removeDevice(id: string) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
             const params = new HttpParams().set('id', id);
-            return this.httpClient.delete('http://localhost:3000/api/device', { params: params });
+            return this.httpClient.delete(environment.API_URL + '/api/device', { params: params });
         }));
     }
 

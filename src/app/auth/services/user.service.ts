@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/auth.model';
 import { UserModel } from '../models/user.model';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -31,14 +32,14 @@ export class UserService {
     }
 
     registerUser(user: User): Observable<User> {
-        return this.httpClient.post<User>('http://localhost:3000/api/auth/register', user)
+        return this.httpClient.post<User>(environment.API_URL + '/api/auth/register', user)
         .pipe(tap(res => {
             this.authenticate(res.email!, res.token!, false);
         }));
     }
     
     loginUser(user: User) {
-        return this.httpClient.post<User>('http://localhost:3000/api/auth/login', user)
+        return this.httpClient.post<User>(environment.API_URL + '/api/auth/login', user)
         .pipe(tap(res => {
             this.authenticate(res.email!, res.token!, res.isSharing!);
         }));

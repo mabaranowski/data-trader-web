@@ -3,7 +3,7 @@
     <h2 class="mt-4 mb-2 text-muted">My devices</h2>
     <sb-dashboard-cards [removeState]="false" [deviceList]="deviceList"></sb-dashboard-cards>
     <h2 class="text-muted">My data streams</h2>
-    <sb-card *ngIf="!!data">
+    <sb-card *ngIf="data.length > 0">
         <div class="card-body">
             <div class="row">
                 <div class="card-body col-md-6" *ngFor="let dataset of data">
@@ -13,7 +13,7 @@
         </div>
     </sb-card>
     <h2 class="text-muted">Subscribed data streams</h2>
-    <sb-card *ngIf="!!subStreamData">
+    <sb-card *ngIf="subStreamData.length > 0">
         <div class="card-body">
             <div class="row">
                 <div class="card-body col-md-6" *ngFor="let subStream of subStreamData">

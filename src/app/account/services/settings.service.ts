@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserService } from '@app/auth/services/user.service';
 import { exhaustMap, take } from 'rxjs/operators';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class SettingsService {
@@ -13,7 +14,7 @@ export class SettingsService {
 
     changePassword(password: string) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.patch('http://localhost:3000/api/settings/change-password', {
+            return this.httpClient.patch(environment.API_URL + '/api/settings/change-password', {
                 email: user.email, 
                 password: password
             });
@@ -22,7 +23,7 @@ export class SettingsService {
 
     checkPasswordValidity(password: string) {
         return this.userService.user.pipe(take(1), exhaustMap(user => {
-            return this.httpClient.post('http://localhost:3000/api/settings/check-password', {
+            return this.httpClient.post(environment.API_URL + '/api/settings/check-password', {
                 email: user.email,
                 password: password
             });

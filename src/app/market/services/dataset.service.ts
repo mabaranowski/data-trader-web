@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class DatasetService {
@@ -8,21 +9,21 @@ export class DatasetService {
 
     getDatasetsByType(type: string) {
         const params = new HttpParams().set('type', type);
-        return this.httpClient.get('http://localhost:3000/api/dataset', { params: params })
+        return this.httpClient.get(environment.API_URL + '/api/dataset', { params: params })
     }
     
     getDatasetDetails(id: string) {
-        const url = `http://localhost:3000/api/dataset/${id}`;
+        const url = `${environment.API_URL}/api/dataset/${id}`;
         return this.httpClient.get(url)
     }
 
     getDatasetDetailsUnwrapped(id: string) {
-        const url = `http://localhost:3000/api/dataset/${id}/unwrapped`;
+        const url = `${environment.API_URL}/api/dataset/${id}/unwrapped`;
         return this.httpClient.get(url)
     }
 
     getDatasetDetailsUnwrappedMetadata(id: string) {
-        const url = `http://localhost:3000/api/dataset/${id}/unwrapped/metadata`;
+        const url = `${environment.API_URL}/api/dataset/${id}/unwrapped/metadata`;
         return this.httpClient.get(url)
     }
 
