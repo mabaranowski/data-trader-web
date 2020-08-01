@@ -12,10 +12,10 @@ import { MarketService } from '@app/market/services/market.service';
   styleUrls: ['./device-details.component.scss']
 })
 export class DeviceDetailsComponent implements OnInit {
-  private device!: Devices;
-  private isActive: boolean = false;
-  private data!: any[];
-  private color!: any;
+  device!: Devices;
+  isActive: boolean = false;
+  data!: any[];
+  color!: any;
 
   constructor(
     private route: ActivatedRoute,

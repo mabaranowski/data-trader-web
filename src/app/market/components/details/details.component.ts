@@ -12,8 +12,8 @@ import { PurchaseService } from '@app/market/services/purchase.service';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  dataset!: Dataset;
-  datasetMetadata!: Dataset;
+  dataset!: any;
+  datasetMetadata!: any;
   downloadJsonHref!: any;
   downloadJsonHrefMetadata!: any;
   

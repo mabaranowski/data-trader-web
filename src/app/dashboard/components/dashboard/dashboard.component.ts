@@ -12,8 +12,8 @@ import { PurchaseService } from '@app/market/services/purchase.service';
 export class DashboardComponent implements OnInit {
     deviceList: any = [];
     subStreamData: any = [];
-    private data: any[] = [];
-    private color!: any;
+    data: any[] = [];
+    color!: any;
 
     constructor(
         private marketService: MarketService,
