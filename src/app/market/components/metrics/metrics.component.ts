@@ -20,7 +20,7 @@ export class MetricsComponent implements OnInit {
   ngOnInit(): void {
     this.marketService.getMetrics().subscribe(res => {
       this.metricsForm.setValue(res);
-    });
+    }, err => {});
   }
 
   onSubmit() {
