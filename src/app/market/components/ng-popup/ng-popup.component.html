@@ -9,7 +9,7 @@
         <div class="modal-body">
             <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="form-group">
-                  <label for="device-name" class="col-form-label">Device name:</label>
+                  <label for="device-name" class="col-form-label">Name:</label>
                   <input 
                   type="text" 
                   class="form-control" 
@@ -20,25 +20,48 @@
                   requred>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-8">
-                      <label for="device-address">Device address:</label>
+                    <div class="form-group col-md-12">
+                      <label for="device-address">Resource address:</label>
                       <input 
                       type="text" 
                       class="form-control" 
                       id="device-address"
                       name="deviceAddress"
-                      ngModel
+                      [(ngModel)]='deviceAddress'
                       required>
                     </div>
-                    <div class="form-group col-md-4">
-                      <label for="device-port">Device port:</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block btn-success" 
+                    (click)="onConnect(deviceAddress)">Connect!</button>
+                </div>
+                <div class="form-group card p-2" *ngIf="!!testPayload">
+                    <pre *ngIf="!!jsonFlag">{{testPayload | json}}</pre>
+                    <pre *ngIf="!jsonFlag">{{testPayload}}</pre>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" [ngClass]="{
+                        'col-md-12' : responseType != 'JSON/XML',
+                        'col-md-4' : responseType == 'JSON/XML'}">
+                        <label for="device-type">Response type:</label>
+                        <select 
+                        class="form-control" 
+                        id="response-type" 
+                        name="responseType" 
+                        [(ngModel)]='responseType'
+                        required>
+                            <option selected disabled>Please select</option>
+                            <option *ngFor="let type of responseTypeList">{{type.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-8" *ngIf="responseType == 'JSON/XML'">
+                      <label for="device-port">Data tag:</label>
                       <input 
-                      type="number" 
+                      type="string" 
                       class="form-control" 
-                      id="device-port"
-                      name="devicePort"
-                      ngModel
-                      required>
+                      id="data-tag"
+                      name="dataTag"
+                      ngModel>
                     </div>
                 </div>
                 <div class="form-group">
@@ -54,6 +77,26 @@
                         <option selected disabled>Please select</option>
                         <option *ngFor="let location of deviceLocationList">{{location.name}}</option>
                     </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="device-address">Longitude:</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      id="longitude"
+                      name="longitude"
+                      ngModel>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="device-port">Latitude:</label>
+                      <input 
+                      type="number" 
+                      class="form-control" 
+                      id="latitude"
+                      name="latitude"
+                      ngModel>
+                    </div>
                 </div>
                 <div *ngIf="invalid" class="text-center text-danger">All fields are required</div>
                 <br *ngIf="!invalid">

@@ -31,7 +31,8 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.userService.autoLogin();
-        this.autoShare(60 * 1000);
+        this.autoShare(5 * 1000);
+        // this.autoShare(60 * 1000);
     }
 
     private autoShare(time: number) {

@@ -30,7 +30,7 @@ export class DeviceDetailsComponent implements OnInit {
       this.device = res;
       res = translateDeviceTypeLocation(res);
       
-      this.deviceService.getDeviceInfo(res.address, res.port).subscribe((dev: any) => {
+      this.deviceService.getDeviceDataByResource(res.address).subscribe((dev: any) => {
         this.isActive = true;
         
         const tmpData: any[] = []

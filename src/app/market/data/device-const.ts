@@ -19,3 +19,8 @@ export const DEVICE_LOCATION = [
     { name: 'Hall', value: 'hall'},
     { name: 'Garage', value: 'garage'}
 ];
+
+export const RESPONSE_TYPE = [
+    { name: 'Text', value: 'text'},
+    { name: 'JSON/XML', value: 'jsonxml'},
+];

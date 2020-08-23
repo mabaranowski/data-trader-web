@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, Output, TemplateRef, ViewChild, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DEVICE_TYPE, DEVICE_LOCATION } from '@app/market/data/device-const';
+import { DEVICE_TYPE, DEVICE_LOCATION, RESPONSE_TYPE } from '@app/market/data/device-const';
 import { NgForm } from '@angular/forms';
 import { MarketService } from '@app/market/services/market.service';
+import { DeviceService } from '@app/commons/services/device.service';
 
 @Component({
   selector: 'sb-ng-popup',
@@ -16,16 +17,21 @@ export class NgPopupComponent implements OnInit, AfterViewInit {
   
   deviceTypeList: any = [];
   deviceLocationList: any[] = [];
+  responseTypeList: any[] = [];
   invalid: boolean = false;
+  testPayload: any;
+  jsonFlag!: boolean;
 
   constructor(
     private modalService: NgbModal,
-    private marketService: MarketService
+    private marketService: MarketService,
+    private deviceService: DeviceService
     ) {}
 
   ngOnInit() {
     this.deviceTypeList = DEVICE_TYPE;
     this.deviceLocationList = DEVICE_LOCATION;
+    this.responseTypeList = RESPONSE_TYPE;
   }
   
   ngAfterViewInit(): void {
@@ -55,4 +61,15 @@ export class NgPopupComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onConnect(address: any) {
+    this.deviceService.getDeviceDataByResource(address).subscribe(res => {
+      this.testPayload = res;
+      this.jsonFlag = true;
+    }, err => {
+      this.deviceService.getDeviceDataByResourceNotJson(address).subscribe(res => {
+        this.testPayload = res;
+        this.jsonFlag = false;
+      });
+    });
+  }
 }

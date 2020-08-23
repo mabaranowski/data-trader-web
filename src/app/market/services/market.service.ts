@@ -66,12 +66,36 @@ export class MarketService {
                 .pipe(
                     map((val: any) => {
                         val.forEach((element: any) => {
-                            this.deviceService.getDeviceInfo(element.address, element.port).subscribe(res => {
+                            this.deviceService.getDeviceDataByResource(element.address).subscribe(res => {
                                 element.state = 'bg-success';
                             }, err => {
+                                // let xml: any = {};
+                                this.deviceService.getDeviceDataByResourceNotJson(element.address).subscribe(res => {
+                                    element.state = 'bg-success';
+                                    // parseString(res, function (err, result) {
+                                    //     Object.entries(result.root).forEach(el => {
+                                    //         const name = el[0];
+                                    //         const valueArray: any = el[1];
+                                    //         const value = valueArray[0];
+
+                                    //         xml[name] = value;
+                                    //     });
+                                    //     xml.state = 'bg-success';
+                                    // });
+                                }, err => {
+                                    if(err.status == /^1/ || /^3/) {
+                                        element.state = 'bg-warning';
+                                    }
+                                    if(err.status == /^4/ || /^5/) {
+                                        element.state = 'bg-danger';
+                                    } 
+                                    if(err.status == 0) {
+                                        element.state = 'bg-secondary';
+                                    }    
+                                });
                                 if(err.status == /^1/ || /^3/) {
                                     element.state = 'bg-warning';
-                                } 
+                                }
                                 if(err.status == /^4/ || /^5/) {
                                     element.state = 'bg-danger';
                                 } 
