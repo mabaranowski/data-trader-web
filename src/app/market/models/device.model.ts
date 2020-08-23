@@ -2,7 +2,10 @@
 export interface Devices {
     name?: string;
     address?: string;
-    port?: number;
+    response?: string;
+    tag?: string;
     type?: string;
     location?: string;
+    longitude?: number;
+    latitude?: number;
 }

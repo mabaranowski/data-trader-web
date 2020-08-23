@@ -21,6 +21,8 @@ export class NgPopupComponent implements OnInit, AfterViewInit {
   invalid: boolean = false;
   testPayload: any;
   jsonFlag!: boolean;
+  responseType: any;
+  deviceAddress: any;
 
   constructor(
     private modalService: NgbModal,
