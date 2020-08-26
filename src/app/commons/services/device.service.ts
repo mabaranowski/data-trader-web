@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, tap } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { parseString } from 'xml2js';
+import { isArray } from 'util';
+import { environment } from 'environments/environment';
+const _ = require('lodash');
 
 @Injectable({ providedIn: 'root' })
 export class DeviceService {
@@ -20,7 +23,8 @@ export class DeviceService {
     }
 
     getDeviceDataByResource(address: string) {
-        const destination = `http://${address}`;
+        // const destination = `http://${address}`;
+        const destination = `${environment.PROXY}${address}`;
         return this.httpClient.get(destination);
     }
 
@@ -30,7 +34,8 @@ export class DeviceService {
     }
 
     getDeviceDataByResourceNotJson(address: string) {
-        const destination = `http://${address}`;
+        // const destination = `http://${address}`;
+        const destination = `${environment.PROXY}${address}`;
         return this.httpClient.get(destination, { responseType: 'text' });
     }
 
@@ -46,7 +51,11 @@ export class DeviceService {
         this.dataSubscription.push(this.getDeviceDataForInterval(time, device.address)
             .subscribe(
                 (data: any) => {
-                    const marker = this.filterPayloadByTag(device.tag, data);
+                    let marker = data;
+                    if(device.tag != '' && device.tag != undefined) {
+                        marker = this.customFind(data, device.tag);
+                    }
+                    console.log(marker);
                     this.dataService.saveData(device._id, marker).subscribe();
                 }, err => {
                     this.dataSubscription.push(this.getDeviceDataForIntervalNotJson(time, device.address)
@@ -55,17 +64,19 @@ export class DeviceService {
                                 let payload: any = {};
                                 parseString(data, function (err, result) {
                                     if(!!result) {
-                                        Object.entries(result.root).forEach(el => {
-                                            const name = el[0];
-                                            const valueArray: any = el[1];
-                                            const value = valueArray[0];
-                                            payload[name] = value;
-                                        });
+                                        payload = result;
                                     } else {
                                         payload = data;
                                     }
                                 });
-                                const marker = this.filterPayloadByTag(device.tag, payload);
+                                let marker = payload;
+                                if(device.tag != '' && device.tag != undefined) {
+                                    marker = this.customFind(payload, device.tag);
+                                    if(isArray(marker) && marker.length == 1) {
+                                        marker = marker[0];
+                                    }
+                                }
+                                console.log(marker);
                                 this.dataService.saveData(device._id, marker).subscribe();
                             }));
                 }));
@@ -78,16 +89,13 @@ export class DeviceService {
         this.dataSubscription = [];
     }
 
-    private filterPayloadByTag(tag: any, payload: any) {
-        let marker;
-        if (!!tag) {
-            marker = payload[tag];
-            if (marker == undefined) {
-                marker = payload;
-            }
-        } else {
-            marker = payload;
-        }
-        return marker;
+    customFind = (obj: any, key: any) => {
+        if (_.has(obj, key))
+            return obj[key];
+        
+        return _.flatten(_.map(obj, (v: any) => {
+            return typeof v == "object" ? this.customFind(v, key) : [];
+        }), true);
     }
+
 }

@@ -4,6 +4,7 @@ import { DEVICE_TYPE, DEVICE_LOCATION, RESPONSE_TYPE } from '@app/market/data/de
 import { NgForm } from '@angular/forms';
 import { MarketService } from '@app/market/services/market.service';
 import { DeviceService } from '@app/commons/services/device.service';
+import format from 'xml-formatter';
 
 @Component({
   selector: 'sb-ng-popup',
@@ -69,7 +70,11 @@ export class NgPopupComponent implements OnInit, AfterViewInit {
       this.jsonFlag = true;
     }, err => {
       this.deviceService.getDeviceDataByResourceNotJson(address).subscribe(res => {
-        this.testPayload = res;
+        try {
+          this.testPayload = format(res);
+        } catch(e) {
+          this.testPayload = res;
+        }
         this.jsonFlag = false;
       });
     });

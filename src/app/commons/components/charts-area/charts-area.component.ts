@@ -35,7 +35,11 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
             this.displayChartTitle = true;
         }
 
-        calculateProperLength(this.payload, 24);
+        try {
+            calculateProperLength(this.payload, 24);
+        } catch(e) {
+            console.log(e);
+        }
         this.payload.forEach(data => {
             this.labels.push(moment(data.time).format('h:mm:ss a'));
             if(data.value == undefined) {

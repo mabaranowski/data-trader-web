@@ -29,10 +29,10 @@ export class DeviceDetailsComponent implements OnInit {
     this.marketService.getDeviceDetails(id).subscribe((res: any) => {
       this.device = res;
       res = translateDeviceTypeLocation(res);
-      
+
       this.deviceService.getDeviceDataByResource(res.address).subscribe((dev: any) => {
         this.isActive = true;
-        
+
         const tmpData: any[] = []
         this.dataService.getDataForDevice(id).subscribe((data: any) => {
 
@@ -42,7 +42,20 @@ export class DeviceDetailsComponent implements OnInit {
           this.data = tmpData;
         });
       }, err => {
-        this.isActive = false;
+        this.deviceService.getDeviceDataByResourceNotJson(res.address).subscribe((dev: any) => {
+          this.isActive = true;
+
+          const tmpData: any[] = []
+          this.dataService.getDataForDevice(id).subscribe((data: any) => {
+
+            data.forEach((element: any) => {
+              tmpData.push(element.payload);
+            });
+            this.data = tmpData;
+          });
+        }, err => {
+          this.isActive = false;
+        });
       });
     });
     this.color = this.randomColor();
@@ -50,18 +63,18 @@ export class DeviceDetailsComponent implements OnInit {
 
   private randomColor() {
     const random = Math.random() * 3 + 1;
-    if(random < 1) {
-        return 'yellow';
+    if (random < 1) {
+      return 'yellow';
     }
-    if(random >= 1 && random < 2) {
-        return 'red';
+    if (random >= 1 && random < 2) {
+      return 'red';
     }
-    if(random >= 2 && random < 3) {
-        return 'blue';
+    if (random >= 2 && random < 3) {
+      return 'blue';
     }
-    if(random >= 3) {
-        return 'green';
+    if (random >= 3) {
+      return 'green';
     }
-}
+  }
 
 }
