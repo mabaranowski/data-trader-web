@@ -8,6 +8,7 @@ import {
 import { calculateProperLength, colorPicker } from '@app/commons/utils/chart.util';
 import { Chart } from 'chart.js';
 import moment from 'moment';
+import { isArray } from 'util';
 
 @Component({
     selector: 'sb-charts-area',
@@ -29,24 +30,32 @@ export class ChartsAreaComponent implements OnInit, AfterViewInit {
     constructor() {}
 
     ngOnInit() {
-        if(typeof this.payload[0] == 'string') {
-            this.chartTitle = this.payload[0];
-            this.payload = this.payload[1];
-            this.displayChartTitle = true;
-        }
-
+        this.displayChartTitle = false;
         try {
             calculateProperLength(this.payload, 24);
         } catch(e) {
             console.log(e);
         }
+
         this.payload.forEach(data => {
-            this.labels.push(moment(data.time).format('h:mm:ss a'));
-            if(data.value == undefined) {
-                this.data.push(data);
+            if(isArray(data)) {
+                data.forEach(data => {
+                    this.labels.push(moment(data.time).format('h:mm:ss a'));
+                    if(!!data.payload && data.payload.value == undefined) {
+                        this.data.push(data.payload);
+                    } else {
+                        this.data.push(data.payload.value);
+                    }
+                });
             } else {
-                this.data.push(data.value);
+                this.labels.push(moment(data.time).format('h:mm:ss a'));
+                if(!!data.payload && data.payload.value == undefined) {
+                    this.data.push(data.payload);
+                } else {
+                    this.data.push(data.payload.value);
+                }
             }
+            
         });
     }
 

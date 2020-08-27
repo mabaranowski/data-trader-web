@@ -33,10 +33,10 @@ export class DashboardComponent implements OnInit {
                 this.dataService.getDataForDevice(element._id).subscribe((data: any) => {
                     const innerTmpData: any[] = [];
                     data.forEach((element: any) => {
-                        innerTmpData.push(element.payload);
+                        innerTmpData.push({payload: element.payload, time: element.time});
                     });
                     
-                    const tmpData = [element.name];
+                    const tmpData = [];
                     tmpData.push(innerTmpData.slice(innerTmpData.length - 24, innerTmpData.length));
                     this.data.push(tmpData);
                 });
@@ -52,10 +52,10 @@ export class DashboardComponent implements OnInit {
                 this.datasetService.getDatasetDetailsUnwrapped(element.dataset._id).subscribe((res: any) => {
                     const innerTmpData: any[] = [];
                     res.forEach((element: any) => {
-                        innerTmpData.push(element.data);
+                        innerTmpData.push({payload: element.data, time: element.time});
                     });
                     
-                    const tmpData = [element.dataset.description];
+                    const tmpData = [];
                     tmpData.push(innerTmpData.slice(innerTmpData.length - 24, innerTmpData.length));
                     this.subStreamData.push(tmpData);
                 });

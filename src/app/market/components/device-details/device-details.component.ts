@@ -35,9 +35,9 @@ export class DeviceDetailsComponent implements OnInit {
 
         const tmpData: any[] = []
         this.dataService.getDataForDevice(id).subscribe((data: any) => {
-
+          
           data.forEach((element: any) => {
-            tmpData.push(element.payload);
+            tmpData.push({payload: element.payload, time: element.time});
           });
           this.data = tmpData;
         });
@@ -47,9 +47,9 @@ export class DeviceDetailsComponent implements OnInit {
 
           const tmpData: any[] = []
           this.dataService.getDataForDevice(id).subscribe((data: any) => {
-
+            
             data.forEach((element: any) => {
-              tmpData.push(element.payload);
+              tmpData.push({payload: element.payload, time: element.time});
             });
             this.data = tmpData;
           });
